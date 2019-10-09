@@ -1,0 +1,8 @@
+header#header.page-header(itemscope itemtype="http://schema.org/WPHeader")
+  +logoLink('header', '', '/', '44px')
+
+  include ../partials/search-form
+
+  button.js-trigger(data-target='#page-filter', data-action='filterShow')
+    +svg('settings','icon--animated')
+    span.button__text.show-sm Фильтры

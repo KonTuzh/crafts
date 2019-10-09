@@ -1,0 +1,19 @@
+@import './../../node_modules/pnotify/dist/PNotifyBrightTheme.css';
+
+[ui-pnotify] .pnotify-material.ui-pnotify-container {
+  padding: 14px;
+  width: max-content!important;
+}
+
+.ui-pnotify-icon {
+  font-size: 24px;
+
+  span {
+    line-height: 30px;
+  }
+}
+
+.ui-pnotify-title {
+  color: inherit;
+  clear: inherit;
+}

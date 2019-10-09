@@ -1,0 +1,15 @@
+@mixin font-face($font-family, $theme-patch, $file-path, $weight: normal, $style: normal) {
+	$url: #{$theme-patch + $file-path};
+	@font-face {
+		font-family: $font-family;
+		font-display: swap;
+		src: url('#{$url}.woff2') format('woff2'),
+				 url('#{$url}.woff') format('woff');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@include font-face("Material Icons", "/fonts/vendor/", "material-design-icons/MaterialIcons-Regular");
+@include font-face("Roboto", "/fonts/", "RobotoRegular");
+@include font-face("Montserrat Alternates", "/fonts/", "MontserratAlternates-Bold", bold);

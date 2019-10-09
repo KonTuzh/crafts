@@ -1,0 +1,69 @@
+#sharer-overlay.overlay.overlay--sharer.scrollable(style='opacity: 0;')
+  .modal.modal--sharer
+    button.js(data-action='closeModal')
+      +svg('cancel')
+    .modal__container
+      header.modal__header
+        .modal__header-content: h5 Поделиться
+
+      .modal__row
+        .modal__col(title='ВКонтакте')
+          button.button.button--vk(
+            data-sharer="vk",
+            data-title=head.title,
+            data-url=head.canonical
+          ): +svg('vk', 'icon--md')
+          span.font-xxs ВКонтакте
+        .modal__col(title='Pinterest')
+          button.button.button--pinterest(
+            data-sharer="pinterest",
+            data-url=head.canonical
+          ): +svg('pinterest', 'icon--md')
+          span.font-xxs Pinterest
+        .modal__col(title='Одноклассники')
+          button.button.button--ok(
+            data-sharer="okru",
+            data-title=head.title,
+            data-url=head.canonical
+          ): +svg('odnoklassniki', 'icon--md')
+          span.font-xxs Однокласс
+        .modal__col(title='Facebook')
+          button.button.button--facebook(
+            data-sharer="facebook",
+            data-url=head.canonical
+          ): +svg('facebook', 'icon--md')
+          span.font-xxs Facebook
+        .modal__col(title='Twitter')
+          button.button.button--twitter(
+            data-sharer="twitter",
+            data-title=head.title,
+            data-url=head.canonical
+          ): +svg('twitter', 'icon--md')
+          span.font-xxs Twitter
+        .modal__col(title='reddit')
+          button.button.button--reddit(
+            data-sharer="reddit",
+            data-url=head.canonical
+          ): +svg('reddit', 'icon--md')
+          span.font-xxs reddit
+        .modal__col(title='WhatsApp')
+          button.button.button--whatsapp(
+            data-sharer="whatsapp",
+            data-title=head.title,
+            data-url=head.canonical
+          ): +svg('whatsapp', 'icon--md')
+          span.font-xxs WhatsApp
+        .modal__col(title='Отправить ссылку по Email')
+          button.button.button--email(
+            data-sharer="email",
+            data-title=head.title,
+            data-url=head.canonical,
+            data-subject="Привет! Посмотри, нравятся такие поделки?",
+            data-to="some@mail.ru"
+          ): +svg('email', 'icon--md')
+          span.font-xxs Email
+
+      footer.modal__footer
+        button.button.button--icon.button--icon--left.button--flat(data-link=head.canonical, data-action='copyLink')
+          +svg('link', 'icon--xxs')
+          span.button__text Копировать ссылку

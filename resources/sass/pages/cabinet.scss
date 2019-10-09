@@ -1,0 +1,73 @@
+.cabinet {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    height: 100%;
+  }
+
+  &__sidebar {
+    width: 100%;
+    @include xs(max-width, 250px);
+  }
+
+  &__main {
+    background: $color--white;
+    width: 100%;
+    @include xs(max-width, calc(100% - 250px));
+    margin: 0;
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: hidden;
+  }
+
+  &__nav {
+    overflow-x: auto;
+    .menu {
+      display: flex;
+      @include xs-block() {
+        flex-wrap: wrap;
+        padding-top: 25px;
+      }
+    }
+
+    .menu__item {
+      display: block;
+      width: 100%;
+      border-left: 5px solid transparent;
+    }
+
+    .menu__link {
+      display: flex;
+      align-items: center;
+      padding: 5px 20px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .icon {
+      width: 18px;
+      height: 18px;
+      margin-right: 15px;
+    }
+
+    .menu__item--active {
+      border-color: $color--accent;
+      background-color: $color--light;
+      .menu__link {
+        opacity: 1;
+      }
+
+      .icon {
+        fill: $color--accent;
+        color: $color--accent;
+      }
+    }
+  }
+}
+

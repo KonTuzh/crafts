@@ -1,0 +1,53 @@
+mixin popular_slide(slide)
+  a.glide__slide.popular__item(href=`${slide.category.slug}/${slide.slug}`)
+    span.popular__item-cover
+      picture
+        source(
+          type="image/webp"
+          data-srcset=`images/posts/${slide.cover}_1600.webp 1600w, images/posts/${slide.cover}_1080.webp 1080w, images/posts/${slide.cover}_820.webp 820w, images/posts/${slide.cover}_680.webp 680w, images/posts/${slide.cover}_380.webp 380w`
+          sizes="(min-width: 860px) 30vw, (min-width: 720px) 50vw, 100vw"
+        )
+        img.lazy(
+          src="data:image/gif;base64,R0lGODlhAgABAIAAAP///wAAACH5BAEAAAEALAAAAAACAAEAAAICTAoAOw==",
+          data-src=`images/posts/${slide.cover}_820.jpeg`,
+          data-srcset=`images/posts/${slide.cover}_1600.jpeg 1600w, images/posts/${slide.cover}_1080.jpeg 1080w, images/posts/${slide.cover}_820.jpeg 820w, images/posts/${slide.cover}_680.jpeg 680w, images/posts/${slide.cover}_380.jpeg 380w`,
+          sizes="(min-width: 860px) 30vw, (min-width: 720px) 50vw, (min-width: 320px) 100vw"
+          alt=slide.heading
+        )
+    span.popular__item-content
+      span.posts__item-category= slide.category.heading
+      h2.posts__item-title: span= slide.heading
+
+      span.posts__item-footer
+        - authorName = slide.owner.lastName ? `${slide.owner.firstName} ${slide.owner.lastName}` : slide.owner.firstName
+        span.post__author-avatar
+          img.lazy(
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==",
+            data-src= `images/users/${slide.owner.photo}_50.jpeg`,
+            data-srcset= `images/users/${slide.owner.photo}_50.jpeg 1x`,
+            alt= authorName
+          )
+        span.posts__item-info
+          span.post__author-name= authorName
+          span.posts__item-stats
+            span.badge.badge--views
+              +svg('eye', 'icon--xs')
+              != slide.views
+            span.badge.badge--likes
+              +svg('favorite', 'icon--xs')
+              != slide.favorites.length
+        span.button.button--flat.button--icon.button--icon--right.button--icon--sm.show-md
+          span.button__text Читать
+          i.icon.material-icons navigate_next
+
+#glide-popular.glide
+  .glide__track(data-glide-el='track')
+    .glide__slides
+      each post in popularPosts.data
+        +popular_slide(post)
+
+  .glide__arrows(data-glide-el='controls')
+    button.button.button--icon--only.button--flat.glide__arrow.glide__arrow--left(data-glide-dir='<')
+      i.icon.material-icons navigate_before
+    button.button.button--icon--only.button--flat.glide__arrow.glide__arrow--right(data-glide-dir='>')
+      i.icon.material-icons navigate_next

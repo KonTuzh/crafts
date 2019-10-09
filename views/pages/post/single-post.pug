@@ -1,0 +1,168 @@
+extends ../../layouts/default
+
+include ../../mixins/buttonFavorite
+include ../../mixins/postListItem
+
+prepend styles
+  link(rel='stylesheet', href='css/lightgallery.css')
+
+block content
+  section.single(class=`single--${post.type}`)
+    - currentUserId = user ? user.id : ''
+    article.single__content(id=post.id)
+      if (post.type !== 'video')
+        .single__cover
+          picture
+            source(
+              type="image/webp"
+              data-srcset=`images/posts/${post.cover}_1600.webp 1600w, images/posts/${post.cover}_1080.webp 1080w, images/posts/${post.cover}_820.webp 820w, images/posts/${post.cover}_680.webp 680w, images/posts/${post.cover}_380.webp 380w`
+              sizes="(min-width: 860px) 30vw, (min-width: 720px) 50vw, 100vw"
+            )
+            img.lazy(
+              src="data:image/gif;base64,R0lGODlhAgABAIAAAP///wAAACH5BAEAAAEALAAAAAACAAEAAAICTAoAOw==",
+              data-src=`images/posts/${post.cover}_820.jpeg`,
+              data-srcset=`images/posts/${post.cover}_1600.jpeg 1600w, images/posts/${post.cover}_1080.jpeg 1080w, images/posts/${post.cover}_820.jpeg 820w, images/posts/${post.cover}_680.jpeg 680w, images/posts/${post.cover}_380.jpeg 380w`,
+              sizes="(min-width: 860px) 30vw, (min-width: 720px) 50vw, (min-width: 320px) 100vw"
+              alt=post.title
+            )
+      a.single__link-home(href="/")
+        +svg('back','icon--xs')
+        span.show-sm На главную
+
+      header.single__header
+        a.posts__item-category(href=post.category.slug target='__blank')= post.category.heading
+        +buttonFavorite(post, currentUserId)
+        h1.heading= post.heading
+        .single__info
+          a.post__author(href=`user/${post.owner._id}` target='__blank')
+            .post__author-avatar
+              img.lazy(
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==",
+                data-src= `images/users/${post.owner.photo}_50.jpeg`,
+                data-srcset= `images/users/${post.owner.photo}_50.jpeg 1x`,
+                alt=post.owner.fullName
+              )
+            .post__author-name
+              span=post.owner.fullName
+              p.read-time Время чтения: 
+                strong=post.readTime
+
+          .stats
+            .badge.badge--difficulty(title='Уровень сложности')
+              span.count= post.difficulty
+              span.text Сложность
+            .badge.badge--likes(title='Лайки')
+              span.count= post.favorites.length
+              span.text Лайки
+            if (post.commentsCount > 0)
+              .badge.badge--comments(title='Комментарии')
+                span.count= post.commentsCount
+                span.text Комментарии
+            .badge.badge--views(title='Просмотры')
+              span.count= post.views
+              span.text Просмотры
+
+        .single__description
+          p.long= post.description
+          button.js-trigger.button--share(title='Поделиться', data-target='#sharer-overlay', data-action='openSharerModal')
+            +svg('share', 'icon--xs')
+
+      include ../../ads/postsListOne
+
+      .single__body
+        if post.content
+          - content = post.content.replace( /&lt;/g, '<')
+          | !{content}
+
+      if (post.galery.length > 0)
+        #galery.single__galery
+          each image in post.galery
+            a.single__galery-item(href=`images/uploads/${image}.jpeg`)
+              picture
+                source(
+                  type="image/webp"
+                  data-srcset=`images/uploads/${image}.webp 1600w`
+                  sizes="30vw"
+                )
+                img.lazy(
+                  src="data:image/gif;base64,R0lGODlhAgABAIAAAP///wAAACH5BAEAAAEALAAAAAACAAEAAAICTAoAOw==",
+                  data-src=`images/uploads/${image}.jpeg`
+                )
+
+      .single__footer
+        .single__footer-author
+          a.avatar(href=`user/${post.owner._id}` target='__blank')
+            picture
+              source(
+                type="image/webp"
+                data-srcset=`images/users/${post.owner.photo}_500.webp 500w`
+              )
+              img.lazy(
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==",
+                data-src= `images/users/${post.owner.photo}_150.jpeg`,
+                data-srcset= `images/users/${post.owner.photo}_150.jpeg 1x, images/users/${post.owner.photo}_300.jpeg 2x, images/users/${post.owner.photo}.jpeg 3x`,
+                alt=post.owner.fullName
+              )
+          
+          .info
+            p.published #{moment(post.publishedAt).lang('ru').format('ll')}
+            h4.name
+              a(href=`user/${post.owner._id}` target='__blank')=post.owner.fullName
+            p.bio #{post.owner.content}
+
+        .single__footer-comments
+          //- button.button.comments__show=`Обсуждение (${post.commentsCount})`
+          #comments
+            form.comments__form.mb-1(data-post=post.id, data-user=currentUserId)
+              fieldset.form-group
+                label.form__label Напишите комментарий
+                textarea.form__input(name='text', maxlength='1000', tabindex='10', rows='2', style='height: auto;', required)
+                input.form__input(type='hidden', name='_csrf', value=csrfToken)
+              fieldset.form-group--button.text-right
+                button.button.button--flat(type='submit') Отправить
+            
+            .comments__list
+              if (post.comments.length > 0)
+                each comment in post.comments
+                  .comments__item
+                    .avatar
+                      picture
+                        source(
+                          type="image/webp"
+                          data-srcset=`images/users/${comment.owner.photo}_500.webp 500w`
+                        )
+                        img.lazy(
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==",
+                          data-src= `images/users/${comment.owner.photo}_150.jpeg`,
+                          data-srcset= `images/users/${comment.owner.photo}_150.jpeg 1x, images/users/${comment.owner.photo}_300.jpeg 2x, images/users/${comment.owner.photo}.jpeg 3x`,
+                          alt=comment.owner.fullName
+                        )
+                    .info
+                      p.published
+                        a.name(href=`user/${comment.owner._id}` target='__blank')=`${comment.owner.fullName} `
+                        span.date #{moment(comment.createdAt).lang('ru').calendar()}
+                      p.text #{comment.text}
+              else
+                .comments__none Комментариев пока нет...
+
+      if (relatedPosts.length > 0)
+        section.page-section.posts
+          #posts
+            .posts__list
+              each related in relatedPosts
+                +postListItem(related)
+
+    aside.single__sidebar
+      include ../../ads/singleSidebar
+
+  include ../../partials/share-modal
+
+append scripts
+  script(src='/js/lg/lightgallery.min.js')
+  script(src='/js/lg/lg-pager.min.js')
+  script(src='/js/lg/lg-autoplay.min.js')
+  script(src='/js/lg/lg-zoom.min.js')
+  script(src='/js/lg/lg-hash.min.js')
+  script(src='/js/lg/lg-share.min.js')
+  script.
+    lightGallery(document.getElementById('galery'));

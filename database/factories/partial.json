@@ -1,0 +1,14 @@
+[
+  {
+    "title": "title",
+    "description": "description",
+    "heading": "Заголовок",
+    "content": "PostContent",
+    "difficulty": "легко",
+    "сover": "postcover",
+    "status": "published",
+    "createdAt": ".598Z",
+    "publishedAt": ".598Z",
+    "updatetAt": ".598Z"
+  }
+]

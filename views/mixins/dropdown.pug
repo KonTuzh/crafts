@@ -1,0 +1,15 @@
+mixin dropdown(dropdownId, selectId, name='category', data, firstOption)
+  - firstOption = firstOption || {val: '', name: 'Выбрать опцию'}
+  div(id= dropdownId)(class="dropdown dropdown--sm dropdown--bottom-left")
+    select.form__select.dropdown__select(id= selectId, name=name)
+      option(value=firstOption.val selected=true)= firstOption.name
+      each opt in data
+        option(value=opt.id)= opt.heading
+
+    .dropdown__container
+      p.dropdown__button= firstOption.name
+      .dropdown__list
+        ul.scrollable
+          li(data-value=firstOption.val)= firstOption.name
+          each opt in data
+            li(data-value=opt.id)= opt.heading

@@ -1,0 +1,388 @@
+.button,
+.button--share,
+.search__submit,
+button[data-action='filterShow'],
+button[data-action='filterClose'],
+button[data-action='pageMenuShow'],
+button[data-action='pageMenuClose'],
+button[data-action='showSignupForm'] {
+  display: inline-block;
+  font-family: $font-primary;
+  text-decoration: none;
+  text-align: center;
+  user-select: none;
+  border: none;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none!important;
+  }
+}
+
+.button,
+.button--share,
+.search__submit,
+button[data-action='filterShow'],
+button[data-action='filterClose'],
+button[data-action='pageMenuShow'],
+button[data-action='pageMenuClose'] {
+  white-space: nowrap;
+  border-radius: 22px;
+  height: 44px;
+  line-height: 44px;
+}
+
+.button--icon,
+.button--sm,
+button[data-action='filterShow'] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-left: 22px;
+  padding-right: 22px;
+  width: max-content;
+}
+
+.button--icon--left,
+button[data-action='filterShow'] {
+  .button__text {
+    margin-top: -2px;
+    margin-left: 10px;
+  }
+}
+
+.button--icon--right {
+  .button__text {
+    margin-top: -2px;
+    margin-right: 10px;
+  }
+}
+
+.button--share,
+.search__submit,
+.button--icon--only,
+button[data-action='pageMenuClose'],
+button[data-action='pageMenuShow'],
+button[data-action='filterClose'] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  padding: 0!important;
+  .icon {
+    line-height: 44px;
+  }
+}
+
+.search__submit,
+.button--icon--sm,
+button[data-action='pageMenuClose'],
+button[data-action='pageMenuShow'],
+button[data-action='filterShow'] {
+  .icon,
+  .button__text {
+    height: 18px;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .icon {
+    width: 18px;
+  }
+}
+
+.button--icon {
+  &--xxs {
+    .icon {
+      width: 14px;
+      height: 14px;
+      font-size: 14px;
+    }
+  }
+  &--xs {
+    .icon {
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+    }
+  }
+
+  &--md {
+    .icon {
+      width: 24px;
+      height: 24px;
+      font-size: 24px;
+    }
+  }
+  &--lg {
+    .icon {
+      width: 26px;
+      height: 26px;
+      font-size: 26px;
+    }
+  }
+}
+
+.button--share,
+.search__submit,
+.button--outline,
+button[data-action='filterShow'],
+button[data-action='showSignupForm'] {
+  box-shadow: inset 0 0 0 1px $color--gray;
+}
+
+.button--share,
+.button--outline,
+button[data-action='filterShow'] {
+  color: $color--black;
+  fill: $color--black;
+}
+
+.button--flat {
+  background-color: $color--teal;
+  color: $color--white;
+  fill: $color--white;
+  &:hover {
+    box-shadow: inset 0 0 0 100px $color--accent;
+  }
+}
+
+.button--white {
+  color: $color--black;
+  fill: $color--black;
+  background-color: $color--white;
+  &:hover {
+    color: $color--white;
+    fill: $color--white;
+    box-shadow: inset 0 0 0 100px $color--accent;
+  }
+}
+
+.search__submit:hover,
+.search.active .search__submit,
+.button--default--hover.active,
+.button--default--hover:hover {
+  box-shadow: inset 0 0 0 100px $color--accent;
+  color: $color--white;
+  fill: $color--white;
+}
+
+.button--light--hover:hover,
+.button--light--hover.active,
+button[data-action='filterShow']:hover,
+button[data-action='showSignupForm']:hover {
+  box-shadow: inset 0 0 0 100px $color--light;
+}
+
+html .button--favorite {
+  &:hover,
+  &.active {
+    background-color: $color--red;
+    color: $color--white;
+    fill: $color--white;
+  }
+
+  .icon {
+    font-size: 24px;
+    transition: all 0.3s ease;
+  }
+}
+
+button:disabled {
+  background: $color--gray;
+  cursor: no-drop;
+  color: $color--dark;
+  box-shadow: inset 0 0 0 0 $color--gray!important;
+}
+
+button[data-action='showSignupForm'] {
+  font-size: 18px;
+  line-height: 1.2;
+  color: $color--darkGray;
+  border-radius: 5px;
+  white-space: pre-line;
+  height: auto;
+  padding: 10px;
+  width: 100%;
+}
+
+button[data-action='closeModal'] {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  margin: 0;
+  z-index: 1;
+  background: $color--white;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  .icon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+button[data-action='filterShow'] {
+  font-size: 16px;
+  line-height: 1;
+  @include to($break_sm){
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  html[data-active~=page-filter] & {
+    box-shadow: inset 0 0 0 100px $color--light;
+  }
+}
+
+button[data-action='filterClose'] {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
+
+button[data-action='pageMenuShow'] {
+  margin-right: auto;
+  margin-left: -9px;
+}
+
+button[data-action='pageMenuClose'] {
+  position: absolute;
+  top: 5px;
+  left: 3px;
+}
+
+.button {
+  &--google {
+    color: $color--white;
+    background-color: $color--google;
+    &:hover {
+      background-color: darken($color--google, 10);
+    }
+  }
+  &--twitter {
+    color: $color--white;
+    background-color: $color--twitter;
+    &:hover {
+      background-color: darken($color--twitter, 10);
+    }
+  }
+  &--facebook {
+    color: $color--white;
+    background-color: $color--facebook;
+    &:hover {
+      background-color: darken($color--facebook, 10);
+    }
+  }
+  &--pinterest {
+    color: $color--white;
+    background-color: $color--pinterest;
+    &:hover {
+      background-color: darken($color--pinterest, 10);
+    }
+  }
+  &--vk {
+    color: $color--white;
+    background-color: $color--vk;
+    &:hover {
+      background-color: darken($color--vk, 10);
+    }
+  }
+  &--ok {
+    color: $color--white;
+    background-color: $color--ok;
+    &:hover {
+      background-color: darken($color--ok, 10);
+    }
+  }
+  &--reddit {
+    color: $color--white;
+    background-color: $color--reddit;
+    &:hover {
+      background-color: darken($color--reddit, 10);
+    }
+  }
+  &--whatsapp {
+    color: $color--white;
+    background-color: $color--whatsapp;
+    &:hover {
+      background-color: darken($color--whatsapp, 10);
+    }
+  }
+  &--email {
+    color: $color--white;
+    background-color: $color--lightDark;
+    &:hover {
+      background-color: darken($color--lightDark, 10);
+    }
+  }
+
+}
+
+#back-to-top-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-size: 40px;
+  line-height: 53px;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  background-color: $color--white;
+  color: $color--accent;
+  cursor: pointer;
+  outline: none;
+  border: 3px solid $color--accent;
+  border-radius: 50%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: background-color, color;
+  &:hover,
+  &:focus {
+    background-color: $color--accent;
+    color: $color--white;
+  }
+}
+
+.btnEntrance {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: btnEntrance;
+}
+
+@keyframes btnEntrance {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.btnExit {
+  animation-duration: 0.25s;
+  animation-fill-mode: both;
+  animation-name: btnExit;
+}
+
+@keyframes btnExit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+}

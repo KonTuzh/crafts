@@ -1,0 +1,19 @@
+extends ../layouts/empty
+
+block content
+  img.lazy(
+    src="data:image/gif;base64,R0lGODlhAgABAIAAAP///wAAACH5BAEAAAEALAAAAAACAAEAAAICTAoAOw==",
+    data-src= `images/errors/${status}.jpg`,
+    data-srcset= `images/errors/${status}.jpg 1x`,
+    alt= head.title
+  )
+  h1= head.title
+  div.error
+    pre= url
+    p= message
+    a(
+      class="button button--flat button--icon button--icon--left button--icon--sm",
+      href="/"
+    )
+      i.icon.material-icons navigate_before
+      span.button__text Вернуться на главную

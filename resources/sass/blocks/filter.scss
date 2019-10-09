@@ -1,0 +1,39 @@
+.filter {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 280px;
+  height: 100vh;
+  z-index: 999;
+  background: $color--white;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+
+  &.active {
+    transform: translateX(0);
+    box-shadow: 0 0 20px 8px rgba(0,0,0,0.08);
+  }
+
+  &__container {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  &__group {
+    margin: 0;
+    padding: 15px;
+    border-bottom: 1px solid;
+    border-color: $color--gray;
+  }
+
+  &__group-heading {
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .control {
+    margin-bottom: 5px;
+  }
+}

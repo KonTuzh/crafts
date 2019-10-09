@@ -1,0 +1,14 @@
+.page-section {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  &__header {
+    max-width: 100%;
+    @include wrapper-full();
+  }
+  
+  &__title,
+  &__subtitle {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,37 @@
+extends ../../layouts/empty
+
+block content
+  h1: +logoLink('login', '', '/', '44px')
+  h2= heading
+  #signup-fields
+    p.modal__fields-text.text-center Зарегистрируйтесь с помощью социальной сети
+    include ../../partials/signup-social-buttons
+    p.modal__fields-text.text-center или с помощью Email
+    form.form.form--signup.show
+      fieldset.form-group
+        label.form__label(for='first-name') Имя
+        input#first-name.form__input(type='text', name='firstName' required)
+      fieldset.form-group
+        label.form__label(for='signup-email') Email
+        input#signup-email.form__input(type='email', name='email', autocomplete='email', required)
+        #signup-email-error.font-error
+      fieldset.form-group
+        label.form__label(for='signup-password') Пароль
+        input#signup-password.form__input(type='password', name='password', autocomplete='new-password', minlength=8, required)
+      fieldset.form-group
+        label.form__label(for='password-confirm') Подтвеждение пароля
+        input#password-confirm.form__input(type='password', name='passwordConfirm', autocomplete='new-password', minlength=8, required)
+      fieldset.form-group
+        label.control.control--checkbox(for='signup-agree-to-terms')
+          | Регистрируясь на этом сайте, я принимаю условия 
+          a(href='/agreement', target='_blank') Пользовательского соглашения
+          |  и 
+          a(href='/confidential', target='_blank') Политику конфиденциальности
+          input#signup-agree-to-terms(type='checkbox', name='agree' required)
+          .control__indicator
+      fieldset.form-group
+        button.button.button--flat(type='submit') Создать учетную запись
+    footer.modal__footer
+      p.modal__fields-text.text-center
+        | Уже есть аккаунт? 
+        a(href="/auth/login") Войти

@@ -1,0 +1,21 @@
+mixin buttonFavorite(post, user)
+  - styles = 'button button--icon--only button--favorite'
+  - user = user || undefined
+  - likeId = ''
+  if (post.favorites.length > 0)
+    each like in post.favorites
+      if (like.user._id == user)
+        - likeId = like.id
+        - styles = 'button button--icon--only button--favorite active'
+    button(
+      class=`${styles}`,
+      data-like=likeId,
+      data-post=post.id,
+      data-user=user
+    ): i.icon.material-icons favorite_border
+  else
+    button(
+      class=`${styles}`,
+      data-post=post.id,
+      data-user=user
+    ): i.icon.material-icons favorite_border

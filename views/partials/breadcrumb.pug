@@ -1,0 +1,10 @@
+mixin breadcrumbItem(url, name, position, last=false)
+  li.breadcrumb__trail
+    if (!last)
+      a(href=url): span=name
+    else
+      span.breadcrumb__last(href=url): span=name
+
+ol.breadcrumb
+  each crumb, i in head.breadcrumb
+    +breadcrumbItem(crumb.item['@id'], crumb.item.name, i+1, (i+1 === head.breadcrumb.length))

@@ -1,0 +1,36 @@
+.user {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  &__info {
+    display: flex;
+    margin-top: 5px;
+  }
+
+  &__status,
+  &__role {
+    font-size: 16px;
+    padding: 0 15px;
+    border-radius: 15px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+
+  }
+
+  &__role {
+    border: 1px solid $color--light;
+    margin-right: 10px;
+    color: $color--lightDark;
+  }
+
+  &__status--active {
+    color: $color--green;
+    background-color: rgba($color--green, 0.1);
+  }
+
+  &__status--inactive {
+    color: $color--red;
+    background-color: rgba($color--red, 0.1);
+  }
+}

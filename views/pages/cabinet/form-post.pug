@@ -1,0 +1,88 @@
+form#form-post.form.form--row(enctype="multipart/form-data")
+  .form-group.col-8
+    input#heading.input-heading(type='text', name='heading', value=`${post.heading ? post.heading : 'Укажите заголовок публикации'}`, required)
+
+    if (user.role === 'admin' && post.slug)
+      input.form__input.mb-1(type='text', name='slug', value=`${post.slug}`, required)
+
+    if post.id
+      fieldset.form-group.form-group--galery
+        h5 Галерея
+        input#galery.form__input(type="file", accept='image/*' name="galery-input", multiple)
+        .galery
+          if post.galery
+            .galery__list
+              each image in post.galery
+                img.galery__item(src=`images/uploads/${image}.jpeg`, alt='')
+
+    if post.content
+      - content = post.content.replace( /&lt;/g, '<')
+    else
+      - str = '<p>Добавьте изображения, видео с YouTube, опишите порядок действий, перечислите необходимые материалы.</p><p>Минимальный объем описания: 350 символов.</p>'
+      - content = str.replace( '&', '&amp;')
+    #editor !{content}
+
+  .col-4
+    fieldset.form-group.form-group--cover
+      .single__cover
+        - cover = post.cover ? post.cover : 'default-png-1568550341166'
+        img#post-cover(src=`images/posts/${cover}_1600.jpeg`, data-cover=cover alt='')
+      label(for='cover', title=`${post.cover ? 'Изменить обложку (1600×800px)' : 'Загрузить обложку (1600×800px)'}`)
+        span: i.icon.material-icons insert_photo
+      input#cover.form__input(type="file", accept='image/*' name="cover")
+
+    fieldset.form-group.form__post-fieldset
+      select#type.form__select.mb-1(name='type')
+        each opt in types
+          if (post.type && post.type === opt.id)
+            option(value=opt.id selected)= opt.heading
+          else
+            option(value=opt.id)= opt.heading
+
+      select#category.form__select.mb-1(name='category')
+        each opt in categories.data
+          if (post.category && post.category.id === opt.id)
+            option(value=opt.id selected)= opt.heading
+          else
+            option(value=opt.id)= opt.heading
+
+      .number.number--row
+        label.form__label Сложность создания поделки (от 1 до 10)
+        .number__button.number__button--decrease(title='Уменьшить сложность')= '-'
+        input#difficulty.number__input(type='number', name='difficulty', min='1', max='10', step='1', value=`${post.difficulty ? post.difficulty : 1}`, required)
+        .number__button.number__button--increase(title='Увеличить сложность')= '+'
+
+      input#post-id.form__input(type='hidden', name='id', value=`${post.id ? post.id : ''}`, required)
+
+    fieldset.form-group.form__post-fieldset
+      label.form__label(for='title') SEO заголовок
+      input#title.form__input.mb-1(type='text', name='title', value=`${post.title ? post.title : ''}`, required)
+
+      label.form__label(for='description') SEO описание
+      textarea#description.form__input.mb-1(name='description', rows='7' style='height: auto;' required)= `${post.description ? post.description : ''}`
+
+      label.form__label(for='keywords') Ключевые слова (через запятую)
+      #keywords.input-tags.mb-1
+
+      if (user.role === 'admin')
+        select#status.form__select(name='status')
+          each opt in stats
+            if (post.status && post.status === opt.val)
+              option(value=opt.val selected)= opt.name
+            else
+              option(value=opt.val)= opt.name
+        if (post.status && post.status !== 'published')
+          input(type='hidden', name='publishedAt', value=`${Date.now()}`)
+
+    fieldset.form-group--button.text-right
+      button.button.button--flat(type='submit') Сохранить
+
+      if (user.role === 'admin' && post.id)
+        button(
+          class='button__delete button button--outline button--icon button--icon--left button--icon--xs button--light--hover'
+          type='button',
+          data-id=post.id,
+          data-type='posts'
+        )
+          +svg('trash')
+          span.button__text.show-sm Удалить

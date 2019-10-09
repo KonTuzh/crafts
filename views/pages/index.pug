@@ -1,0 +1,34 @@
+extends ../layouts/default
+
+include ../mixins/figureListItem
+include ../mixins/dropdown
+include ../mixins/pagination
+
+block content
+  section.content__hero.lazy(data-bg=`url('${hero.cover.url}')`)
+    h1.heading= hero.heading
+    p.description= hero.description
+
+  section.page-section.popular
+    include ../partials/slide-popular
+
+  section.page-section.cat
+    h2.page-section__title.text-center= categories.title
+    p.page-section__subtitle.text-center= categories.subtitle
+    .cat__list
+      - var itemCat = 0
+      while itemCat < 3
+        +figureListItem(categories.data[itemCat])
+        - itemCat++
+
+  section.page-section.posts
+    .posts__header
+      h2.page-section__title Наши новые поделки
+
+      +dropdown('categories-dropdown', 'categories-select', 'category', categories.data, {val: '', name: 'Все категории'})
+
+      button.js-trigger(data-target='#page-filter', data-action='filterShow')
+        +svg('settings','icon--animated')
+        span.button__text.show-sm Фильтры
+    #posts
+      include ../partials/posts-list

@@ -1,0 +1,7 @@
+include ../mixins/userlistItem
+
+ul#user-menu.userlist
+  +userlistItem('/me', 'portrait', 'Настройки')
+  +userlistItem('/favorites', 'favorite_border', 'Избранное')
+  //- +userlistItem('/crafts', 'art_track', 'Ваши поделки')
+  +userlistItem('/auth/logout', 'power_settings_new', 'Выйти')

@@ -1,0 +1,26 @@
+extends ../../layouts/cabinet
+
+include ../../mixins/postListItem
+include ../../mixins/svg
+include ../../mixins/pagination
+
+block content
+  aside.cabinet__sidebar
+    include ./navigation
+
+  .cabinet__main
+    section.page-section.posts
+      .posts__results.font-xxs
+        h1.posts__results-query Избранное
+
+        .posts__results-total= `Найдено: `
+          span.total-count= hero.total
+      .posts__list
+        if content.length === 0
+          .posts__list--empty
+            h5 Вы не добавили еще ни одной записи в избранное
+            p Начните прямо сейчас.
+            a(href="/search") Смотреть публикации
+        else
+          each post, i in content
+            +postListItem(post)

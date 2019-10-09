@@ -1,0 +1,35 @@
+mixin control(name, dataName, dataValue, active=false, css='control--checkbox')
+  label(class=`control ${css} ${active ? 'active' : ''}`, data-field-name=dataName, data-value=dataValue)= name
+    span.control__indicator
+
+aside#page-filter.filter(class=`${filterShow ? 'active' : ''}`)
+  button.js-trigger(data-target='#page-filter', data-action='filterClose')
+    +svg('cancel', 'icon--xxs')
+  .scrollable
+    .filter__container
+      .filter__group
+        .filter__group-heading= filter.type.heading
+        div(id=filter.type.id)
+          each item in filter.type.data
+            +control(item.title, filter.type.name, item.value, item.active, 'control--checkbox')
+
+      .filter__group
+        .filter__group-heading= filter.category.heading
+        div(id=filter.category.id)(class="dropdown dropdown--sm dropdown--bottom-left")
+          .dropdown__container
+            p.dropdown__button(
+              data-field-name=filter.category.name,
+              data-value=filter.category.data[filter.category.active].value
+            )
+              span=filter.category.data[filter.category.active].title
+            .dropdown__list
+              ul.scrollable
+                each item, index in filter.category.data
+                  li.dropdown__item(data-field-name=filter.category.name, data-value=item.value)
+                    span= item.title
+
+      .filter__group
+        .filter__group-heading= filter.sort.heading
+        div(id=filter.sort.id)
+          each item in filter.sort.data
+            +control(item.title, filter.sort.name, item.value, item.active, 'control--radio')

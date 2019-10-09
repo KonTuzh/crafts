@@ -1,0 +1,10 @@
+@include reset();
+
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+summary {
+  display: block;
+}

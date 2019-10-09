@@ -1,0 +1,66 @@
+extends ../../layouts/cabinet
+
+include ../../mixins/svg
+include ../../mixins/pagination
+
+block content
+  aside.cabinet__sidebar
+    include ./navigation
+
+  .cabinet__main
+    section.page-section.posts
+      .posts__results.font-xxs
+        h1.posts__results-query
+          a.button.button--flat.button--icon.button--icon--left.button--icon--sm(href="/posts/new")
+            i.icon.material-icons control_point
+            span.button__text Добавить пост
+
+        .posts__results-total= `Найдено: `
+          span.total-count= hero.total
+
+      if content.length === 0
+        .posts__list--empty
+          h5 В базе данных записей не найдено
+          p Добавьте первую запись
+          a(href="/posts/new") Создать пост
+      else
+        table.table.table--post-list
+          thead
+            tr
+              th #
+              th Тип
+              th Обложка
+              th Заголовок
+              th Категория
+              th Статус
+              th Автор
+              th Статистика
+          tbody
+            each post, i in content
+              - authorName = post.owner.lastName ? `${post.owner.firstName} ${post.owner.lastName}` : post.owner.firstName
+              tr
+                td= i + 1
+                td
+                  +svg(post.type, 'icon--xs')
+                td: img.post__cover(src=`images/posts/${post.cover}_380.jpeg`, alt= post.heading)
+                td: a.posts__title(href=`/posts/${post.id}`)= post.heading
+                td: a.posts__category(href=`/categories/${post.category.id}`)= post.category.heading
+                td= post.status
+                td
+                  a.post__author-avatar(href=`user/${post.owner._id}` target='__blank')
+                    img(src=`images/users/${post.owner.photo}_50.jpeg`, alt= authorName)
+                  span= authorName
+                td
+                  ul
+                    li(title='Сложность'): span.flex-row-center
+                      +svg('difficulty', 'icon--xs')
+                      != post.difficulty
+                    li(title='Просмотры'): span.flex-row-center
+                      +svg('eye', 'icon--xs')
+                      != post.views
+                    li(title='Лайки'): span.flex-row-center
+                      +svg('favorite', 'icon--xs')
+                      != post.favorites.length
+
+      if pagination
+        +pagination(pagination.hasPrev, pagination.hasNext, pagination.page, pagination.last, pagination.link)

@@ -1,0 +1,4 @@
+@mixin linear-gradient($color){
+  background: linear-gradient(to bottom, rgba($color,0) 30%, rgba($color,1) 80%, rgba($color,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$color, endColorstr=$color, GradientType=0 );
+}

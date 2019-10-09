@@ -1,0 +1,65 @@
+.logo {
+  display: block;
+  text-decoration: none;
+  color: $color--accent;
+  padding: 0;
+  @include xs-block(){
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 166px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  &__image {
+    display: block;
+    flex: 1;
+    background-image: none!important;
+  }
+
+  &__label {
+    display: none;
+    @include xs-block(){
+      display: flex;
+      flex-direction: column;
+      margin-left: 5px;
+    }
+  }
+
+  &__title {
+    font-family: $font-secondary;
+    font-size: 21px;
+  }
+
+  &__subtitle {
+    font-family: $font-primary;
+    font-size: 9px;
+  }
+
+  &-header {
+    .logo__image {
+      width: 44px;
+    }
+  }
+
+  &-signup-modal {
+    @include to($break_xs){
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 166px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    color: $color--white;
+    fill: $color--white;
+    margin-bottom: 10px;
+
+    .logo__label {
+      display: flex;
+      flex-direction: column;
+      margin-left: 5px;
+    }
+  }
+}

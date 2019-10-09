@@ -1,0 +1,31 @@
+.icon {
+  &--white {
+    color: $color--white;
+    fill: $color--white;
+  }
+  &--black {
+    color: $color--black;
+    fill: $color--black;
+  }
+}
+
+.icon--xxs {
+  width: 16px;
+  height: 16px;
+}
+.icon--xs {
+  width: 18px;
+  height: 18px;
+}
+.icon--sm {
+  width: 21px;
+  height: 21px;
+}
+.icon--md {
+  width: 24px;
+  height: 24px;
+}
+.icon--lg {
+  width: 26px;
+  height: 26px;
+}

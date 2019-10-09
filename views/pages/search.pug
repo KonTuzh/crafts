@@ -1,0 +1,13 @@
+extends ../layouts/default
+
+block content
+  include ../ads/searchTop
+
+  section.page-section.posts
+    .posts__results.font-xxs
+      h1.posts__results-query= hero.heading
+        span.search-value= `${searchValue}`
+      .posts__results-total= `Найдено: `
+        span.total-count= hero.total
+    #posts
+      include ../partials/posts-list

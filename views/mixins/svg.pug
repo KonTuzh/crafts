@@ -1,0 +1,9 @@
+mixin inline-svg(name, mod, role='img')
+  - mod = mod || ''
+  svg(class='icon icon-' + name + ' ' + mod, role=role)
+    use(xlink:href='sprite.svg#' + name)
+
+mixin svg(name, mod, role='img')
+  - mod = mod || ''
+  svg(class='icon icon-' + name + ' ' + mod, role=role)
+    use(xlink:href='#' + name)

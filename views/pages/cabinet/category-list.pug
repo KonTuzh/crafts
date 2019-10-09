@@ -1,0 +1,63 @@
+extends ../../layouts/cabinet
+
+include ../../mixins/svg
+include ../../mixins/pagination
+
+block content
+  aside.cabinet__sidebar
+    include ./navigation
+
+  .cabinet__main
+    section.page-section.posts
+      .posts__results.font-xxs
+        h1.posts__results-query
+          a.button.button--flat.button--icon.button--icon--left.button--icon--sm(href="/categories/new")
+            i.icon.material-icons control_point
+            span.button__text Добавить категорию
+
+        .posts__results-total= `Найдено: `
+          span.total-count= hero.total
+
+      if content.length === 0
+        .posts__list--empty
+          h5 В базе данных записей не найдено
+          p Добавьте первую запись
+          a(href="/categories/new") Создать категорию
+      else
+        table.table.table--post-list
+          thead
+            tr
+              th #
+              th Обложка
+              th Заголовок
+              th Статус
+              th Автор
+              th Изменения
+          tbody
+            each item, i in content
+              - authorName = item.owner.lastName ? `${item.owner.firstName} ${item.owner.lastName}` : item.owner.firstName
+              tr
+                td= i + 1
+                td: img.post__cover(src=`images/categories/${item.cover}`, alt= item.heading)
+                td: a.posts__title(href=`/categories/${item.id}`)= item.heading
+                td= item.status
+                td
+                  a.post__author-avatar(href=`user/${item.owner._id}` target='__blank')
+                    img(src=`images/users/${item.owner.photo}_50.jpeg`, alt= authorName)
+                  span= authorName
+                td
+                  ul
+                    li(title='Создано'): span.flex-row-center
+                        +svg('clock', 'icon--xs')
+                        != moment(item.createdAt).lang('ru').format('LLLL')
+                    if item.updatetAt
+                      li(title='Изменено'): span.flex-row-center
+                        +svg('clock', 'icon--xs')
+                        != moment(item.updatetAt).lang('ru').format('LLLL')
+                    if item.publishedAt
+                      li(title='Опубликовано'): span.flex-row-center
+                        +svg('clock', 'icon--xs')
+                        != moment(item.publishedAt).lang('ru').format('LLLL')
+
+      if pagination
+        +pagination(pagination.hasPrev, pagination.hasNext, pagination.page, pagination.last, pagination.link)

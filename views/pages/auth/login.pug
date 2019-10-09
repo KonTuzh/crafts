@@ -1,0 +1,27 @@
+extends ../../layouts/empty
+
+block content
+  h1: +logoLink('login', '', '/', '44px')
+  h2= heading
+  if errors
+    .errors
+      each error in errors
+        span=error.message
+
+  #login-fields
+    p.modal__fields-text.text-center Войдите с помощью социальной сети
+    include ../../partials/signup-social-buttons
+    form.form.form--login
+      fieldset.form-group
+        label.form__label(for='email') Email
+        input#email.form__input(type='email', name='email', autocomplete='email', required)
+      fieldset.form-group
+        label.form__label(for='password') Пароль
+        input#password.form__input(type='password', name='password', autocomplete='current-password', minlength=8, required)
+      a.forgot-password.js(href="/auth/password-reset", data-action='showForgotFields') Забыли пароль?
+      fieldset.form-group
+        button.button.button--flat(type='submit') Войти
+    footer.modal__footer
+      p.modal__fields-text.text-center
+        | Нет аккаунта? 
+        a(href="/auth/signup") Зарегистрируйтесь

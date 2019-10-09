@@ -1,0 +1,61 @@
+.userlist {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  margin-top: 7px;
+  min-width: 200px;
+  border-radius: 5px;
+  box-shadow: 0 0 60px rgba(34,34,34,.25);
+  background: $color--white;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 150ms cubic-bezier(1,0,0,1),transform 150ms cubic-bezier(1,0,0,1);
+  visibility: hidden;
+
+  &:after {
+    position: absolute;
+    top: -10px;
+    right: 22px;
+    transform: translateX(50%);
+    height: 0;
+    width: 0;
+    border-bottom: 4px solid $color--white;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    margin: 6px 0 0;
+    content: "";
+  }
+
+  &.active {
+    opacity: 1;
+    transform: translateY(44px);
+    visibility: visible;
+  }
+
+  li:last-child {
+    .link--text {
+      border-top: 1px solid $color--light;
+      margin-top: 10px;
+    }
+  }
+
+  .link--text {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    text-decoration: none;
+    color: inherit;
+    white-space: nowrap;
+  }
+
+  .icon {
+    color: inherit;
+    margin-right: 10px;
+  }
+
+  .link--text:hover {
+    color: $color--accent;
+    background: $color--body;
+  }
+}

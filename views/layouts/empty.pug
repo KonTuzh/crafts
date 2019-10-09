@@ -1,0 +1,22 @@
+include ../mixins/svg
+include ../mixins/logo
+
+doctype html
+html(lang="ru-RU")
+  include ../partials/head
+  body(class=`${bodyClass || 'page-empty'}`)
+    <!--[if lt IE 7]>
+    <p class="browsehappy">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="http://browsehappy.com/">обновите</a> его.</p>
+    <![endif]-->
+    div(style='display:none')
+      include ../../public/sprite.svg
+    main.content
+      block content
+    
+    include ../partials/footer
+
+    button#back-to-top-btn
+      i.icon.material-icons keyboard_arrow_up
+
+    block scripts
+      script(src='/js/app.js')

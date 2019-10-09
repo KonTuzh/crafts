@@ -1,0 +1,189 @@
+h1,h2,h3,h4,h5,h6 {
+  clear: both;
+  margin: 0;
+  line-height: 1.15;
+  font-family: $font-secondary;
+  color: $color--main;
+  a{
+    text-decoration: none;
+    color: $color--black;
+  }
+}
+
+h1 {
+  font-size: 30px;
+  @include sm(font-size, 48px);
+}
+
+h2 {
+  font-size: 24px;
+  @include sm(font-size, 30px);
+}
+
+h3 {
+  font-size: 22px;
+  @include sm(font-size, 26px);
+}
+
+h4 {
+  font-size: 20px;
+  @include sm(font-size, 24px);
+}
+
+h5 {
+  font-size: 18px;
+  @include sm(font-size, 21px);
+}
+
+h6 {
+  font-size: 18px;
+}
+
+b,strong {
+  font-weight: 600;
+}
+
+a {
+  background-color: transparent;
+	&:hover,
+	&:active,
+	&:focus {
+    outline: 0;
+    text-decoration: none;
+  }
+}
+
+blockquote {
+  position: relative;
+  border-left: 5px solid $color--accent;
+  color: $color--lightGray;
+  font-size: 24px;
+}
+
+code{
+  background-color: $color--light;
+  color: inherit;
+}
+
+big {
+  font-size: 125%;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  position: relative;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.25em;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+  background-color: $color--muted;
+  border: 0;
+  height: 1px;
+  margin-bottom: 1.5em;
+}
+
+pre {
+  background: $color--light;
+  font-family: monospace, monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  max-width: 100%;
+  overflow: auto;
+  padding: 16px;
+}
+
+
+.font-xxs {font-size: 14px;}
+.font-xs {font-size: 16px;}
+.font-sm {font-size: 18px;}
+.font-md {font-size: 24px;}
+.font-lg {font-size: 36px;}
+
+.font-error {
+  font-size: 14px;
+  color: $color--red;
+}
+
+.text-center {text-align: center;}
+.text-left {text-align: left;}
+.text-right {text-align: right;}
+
+.document {
+  &__header,
+  &__content {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    @include wrapper-full();
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .logo {
+      width: 44px;
+      @include xs(width, auto);
+    }
+  }
+
+  &__content {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background: $color--white;
+    padding-top: 2em;
+    padding-bottom: 2em;
+
+    ol {
+      list-style: none;
+      counter-reset: li;
+      padding-inline-start: 0;
+      margin-top: 1em;
+
+      li {
+        margin-bottom: 15px;
+        &:before {
+          counter-increment: li;
+          content: counters(li,".") ". ";
+        }
+        h2, p {
+          display: inline;
+        }
+      }
+
+      li ol>li {
+        position: relative;
+        padding-left: 40px;
+        &:before {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+        ol>li {
+          &:before {
+            left: -20px;
+          }
+        }
+      }
+    }
+  }
+}

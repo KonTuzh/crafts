@@ -1,0 +1,30 @@
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  meta(name='theme-color', content='#2ebbab')
+  base(href="/")
+  title #{head.title} | gitCrafts
+  if head.meta
+    each meta in head.meta
+      meta(name=meta.name, content=meta.content)
+  if head.opengraph
+    each og in head.opengraph
+      meta(property=og.property content=og.content)
+  if head.prev
+    meta(rel="prev" href=head.prev)
+  if head.next
+    meta(rel="next" href=head.next)
+  if head.canonical
+    link(rel='canonical', href=head.canonical)
+
+  link(rel='apple-touch-icon', sizes='180x180', href='/images/branding/apple-touch-icon.png')
+  link(rel='icon', type='image/png', sizes='32x32', href='/images/branding/favicon-32x32.png')
+  link(rel='icon', type='image/png', sizes='16x16', href='/images/branding/favicon-16x16.png')
+  link(rel='shortcut icon', type='image/x-icon', href='/favicon.ico')
+
+  if head.jsonLd
+    script(type='application/ld+json') !{head.jsonLd}
+
+  block styles
+    link(rel='stylesheet', href='css/styles.css')

@@ -1,0 +1,34 @@
+.avatar {
+  display: block;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: $color--gray;
+}
+
+.avatar--navigation {
+  width: 28px;
+  height: 28px;
+}
+
+.avatar--header {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+.avatar--profile {
+  position: relative;
+  width: 150px;
+  height: 150px;
+
+  img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

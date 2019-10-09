@@ -1,0 +1,32 @@
+.auth {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: stretch;
+  align-items: center;
+  &__user,
+  &__action {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: stretch;
+    align-items: center;
+    color: $color--white;
+    cursor: pointer;
+    margin-left: 15px;
+    padding: 0 5px;
+    transition: all .3s ease;
+    &:hover {
+      background-color: rgba($color--white, 0.08);
+    }
+  }
+  &__user-name,
+  &__action-text {
+    display: block;
+    margin-right: 10px;
+  }
+
+  &__action-icon {
+    width: 20px;
+  }
+
+}

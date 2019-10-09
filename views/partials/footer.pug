@@ -1,0 +1,6 @@
+footer.page-footer(itemscope, itemtype="http://schema.org/WPFooter")
+  .container
+    - var year = new Date().getFullYear()
+    .copyright &copy; 
+      span(itemprop='copyrightYear') #{year}, 
+      span(itemprop='name') gitCrafts.com

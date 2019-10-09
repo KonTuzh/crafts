@@ -1,0 +1,26 @@
+mixin logoSpan(name='header', mod='', size='40px', title='gitCrafts', subtitle='Поделки своими руками')
+  span(class='logo logo-' + name + ' ' + mod)
+    picture
+      source(srcset='images/branding/logo.svg' type='image/svg+xml')
+      img(class="logo__image" width=size height=size src="images/branding/logo.png", alt=subtitle)
+    span.logo__label
+      span.logo__title= title
+      span.logo__subtitle= subtitle
+
+mixin logoSvg(name='header', mod='', size='40px', title='gitCrafts', subtitle='Поделки своими руками')
+  span(class='logo logo-' + name + ' ' + mod)
+    svg(class='logo__image', width=size, height=size, role='img')
+      use(xlink:href='images/branding/logo.svg#logo')
+    span.logo__label
+      span.logo__title= title
+      span.logo__subtitle= subtitle
+
+mixin logoLink(name='header', mod='', link='/', size='30px', title='gitCrafts', subtitle='Поделки своими руками')
+  a(class='logo logo-' + name + ' ' + mod, href=link)
+    picture
+      source(srcset='images/branding/logo.svg' type='image/svg+xml')
+      img(class="logo__image" width=size height=size src="images/branding/logo.png", alt=subtitle)
+    span.logo__label
+      span.logo__title= title
+      if subtitle
+        span.logo__subtitle= subtitle

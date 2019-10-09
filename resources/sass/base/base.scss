@@ -1,0 +1,88 @@
+body {
+	background: $color--body;
+	color: $color--black;
+  font-family: $font-primary;
+  font-size: 16px;
+  @include sm-block(){
+    font-size: $base-font-size;
+  }
+}
+
+html {
+  .hide {
+    display: none!important;
+  }
+  .hide-xs {
+    @include xs(display, none!important)
+  }
+  .hide-sm {
+    @include sm(display, none!important)
+  }
+  .hide-md {
+    @include md(display, none!important)
+  }
+  .hide-lg {
+    @include lg(display, none!important)
+  }
+
+  .show-xs, .show-sm,
+  .show-md, .show-lg {
+    display: none!important;
+  }
+
+  .show-xs {
+    @include xs(display, block!important)
+  }
+  .show-sm {
+    @include sm(display, block!important)
+  }
+  .show-md {
+    @include md(display, block!important)
+  }
+  .show-lg {
+    @include lg(display, block!important)
+  }
+  .show-md.button--icon {
+    @include md(display, flex!important)
+  }
+}
+
+html .mg-none {
+  margin: 0;
+}
+
+html .mb-1 {
+  margin-bottom: 1em;
+}
+
+html .mr-1 {
+  margin-right: 1em;
+}
+
+.col-4,
+.col-8 {
+  @include col();
+  @include size(12);
+}
+
+.col-8 {
+  @include size-md(8);
+}
+
+.col-4 {
+  @include size-md(4);
+}
+
+.flex-row-center {
+  display: flex;
+  align-items: center;
+}
+
+.sticky {
+  position: sticky;
+  top: 10px;
+}
+
+.red {
+  color: $color--red;
+}

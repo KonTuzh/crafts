@@ -1,0 +1,39 @@
+include ../mixins/svg
+include ../mixins/logo
+
+doctype html
+html(lang="ru-RU")
+  include ../partials/head
+  body(class=`cabinet cabinet--${user.role}`)
+    <!--[if lt IE 7]>
+    <p class="browsehappy">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="http://browsehappy.com/">обновите</a> его.</p>
+    <![endif]-->
+    div(style='display:none')
+      include ../../public/sprite.svg
+
+    header#header.page-header
+      +logoLink('header', '', '/', '44px')
+
+      include ../partials/search-form
+
+      .page-header__user
+        button.js-trigger.button.avatar.avatar--header(data-target='#user-menu', data-action='userMenuToggle')
+          img.lazy(
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==",
+            data-src= `images/users/${user.photo}_50.jpeg`,
+            data-srcset= `images/users/${user.photo}_50.jpeg` + ' 1x',
+            alt= user.firstName
+          )
+        include ../partials/user-menu
+
+    main.content
+      block content
+
+    include ../partials/footer
+
+    button#back-to-top-btn
+      i.icon.material-icons keyboard_arrow_up
+
+    block scripts
+      script(src='/js/app.js')
+

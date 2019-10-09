@@ -1,0 +1,12 @@
+mixin figureListItem(item)
+  figure.cat__item(data-id=item.id)
+    a.cat__link(href=item.slug)
+      img.lazy(
+        src="data:image/gif;base64,R0lGODlhAgABAIAAAP///wAAACH5BAEAAAEALAAAAAACAAEAAAICTAoAOw==",
+        data-src= `images/categories/${item.cover}`,
+        data-srcset= `images/categories/${item.cover} 1x`,
+        alt=item.heading
+      )
+      figcaption.cat__content
+        p.title=item.heading
+        span.description.show-md=item.description

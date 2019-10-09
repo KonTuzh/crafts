@@ -1,0 +1,30 @@
+mixin pagination(prev=false, next=false, page=1, last=1, link='/search')
+  if (prev || next)
+    ul.pagination
+
+      if prev
+        li.pagination__prev
+          a.pagination__link(href=`${link}${page - 1}`)
+            i.icon.material-icons navigate_before
+            span.link-text.show-md Назад
+
+      if (last > 1)
+        - var start = (page < 3) ? 1 : page - 2
+        - var end = (last - page < 3) ? last : page + 2
+        while start <= end
+          if (start === page)
+            li.pagination__item.pagination__item--active: span.pagination__link= start
+          else
+            li.pagination__item: a.pagination__link(href=`${link}${start}`)= start
+          - start++
+        if last - end === 1
+          li.pagination__item: a.pagination__link(href=`${link}${last}`)= last
+        if last - end >= 2
+          li.pagination__seporator: span.pagination__link ...
+          li.pagination__item: a.pagination__link(href=`${link}${last}`)= last
+
+      if next
+        li.pagination__next
+          a.pagination__link(href=`${link}${page + 1}`)
+            span.link-text.show-md Вперед
+            i.icon.material-icons navigate_next

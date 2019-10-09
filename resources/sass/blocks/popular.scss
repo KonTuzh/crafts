@@ -1,0 +1,151 @@
+.popular {
+  &__item {
+    position: relative;
+    text-decoration: none;
+    @include wrapper-full();
+    @include md-block() {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  }
+
+  &__item-cover {
+    display: block;
+    position: relative;
+    @include md-block(){
+      width: calc(65% - 10px);
+      order: 1;
+      margin-left: -20%;
+    }
+
+    @include to($break_md) {
+      &:after,
+      &:before {
+        content: '';
+        position: absolute;
+        background-color: rgba($color--accent,.3);
+        border-radius: 5px;
+      }
+  
+      &:before {
+        top: 5px;
+        bottom: 5px;
+        left: -5px;
+        right: -5px;
+      }
+  
+      &:after {
+        top: 10px;
+        bottom: 10px;
+        left: -10px;
+        right: -10px;
+      }
+    }
+
+    img {
+      position: relative;
+      border-radius: 5px;
+      z-index: 1;
+    }
+  }
+
+  &__item-cover,
+  &__item-content {
+    @include md-block(){
+      flex: 1 1 auto;
+      min-width: 250px;
+      max-width: 100%;
+    }
+  }
+
+  &__item-content {
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    opacity: 0;
+    transform: translateY(120%);
+    transition: opacity .5s ease;
+
+    @include md-block(){
+      width: calc(35% - 20px);
+      z-index: 2;
+    }
+
+    .posts__item-category {
+      margin-left: 25px;
+    }
+
+    .posts__item-title {
+      @include md-block(){
+        max-width: 550px;
+      }
+    }
+
+    .posts__item-title span {
+      background: $color--body;
+      box-decoration-break: clone;
+      padding: 5px 10px;
+      line-height: 1.35;
+    }
+
+    .posts__item-footer {
+      @include md(border-color, transparent);
+      .button {
+        margin-left: auto;
+        margin-right: auto;
+        @include lg(transform, translateX(-50%))
+      }
+    }
+  }
+
+  .glide {
+    &__arrows {
+      @include md-block(){
+        position: relative;
+        left: 26%;
+        width: 150px;
+      }
+      @include lg-block(){
+        height: 44px;
+        bottom: 44px;
+      }
+    }
+  
+    &__arrow {
+      top: 25%;
+    }
+  
+    &__arrow--left {
+      left: 15px;
+    }
+  
+    &__arrow--right {
+      right: 15px;
+    }
+  }
+
+  &__item {
+    &.glide__slide--active {
+      .popular__item-content {
+        opacity: 1;
+        -webkit-animation-duration: .5s;
+        animation-duration: .5s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        animation-name: fadeInUp;
+      }
+    }
+  }
+}
+
+@include keyframes(fadeInUp) {
+	from {
+		opacity: 0;
+		transform: translateY(60%);
+	}
+	to {
+		opacity: 1!important;
+		transform: translateY(0);
+	}
+}

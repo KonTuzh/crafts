@@ -1,0 +1,25 @@
+.page-header {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin: 0;
+  @include wrapper-full();
+  padding-top: 10px;
+  padding-bottom: 10px;
+  z-index: 98;
+  background-color: $color--white;
+  border-bottom: 1px solid $color--gray;
+
+  &.header--fixed {
+    position: fixed;
+    top: -120px;
+    left: 0;
+    right: 0;
+    transition: top .3s ease;
+  }
+
+  &.header--show {
+    top: 0;
+  }
+}

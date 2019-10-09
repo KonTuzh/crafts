@@ -1,0 +1,20 @@
+include ../mixins/postListItem
+include ../mixins/svg
+include ../mixins/pagination
+
+.posts__list
+  if content.length === 0
+    .posts__list--empty
+      img(src="images/errors/no-content.png", alt= 'Нет контента')
+      h5 К сожалению, по Вашему запросу ничего не найдено
+      p Пожалуйста, уточните запрос и попробуйте еще раз...
+  else
+    each post, i in content
+      +postListItem(post)
+      if i === 5
+        include ../ads/postsListOne
+      if i === 11
+        include ../ads/postsListSecond
+
+if pagination
+  +pagination(pagination.hasPrev, pagination.hasNext, pagination.page, pagination.last, pagination.link)

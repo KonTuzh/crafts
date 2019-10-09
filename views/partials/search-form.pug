@@ -1,0 +1,6 @@
+form#search.search(action='/search', method="get")
+  .form-group
+    - searchValue = (filter && filter.queryString.query !== undefined) ? filter.queryString.query : ''
+    input#search-value.form__input(type="text", name="query", placeholder="Поиск по сайту...", value=`${searchValue}`, autocomplete="off", min="2", required)
+    button.search__submit(type="submit")
+      +svg('search','icon--animated')

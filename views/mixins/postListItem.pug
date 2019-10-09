@@ -1,0 +1,60 @@
+include ./buttonFavorite
+
+mixin postListItem(post)
+  article.posts__item(id=post.id, itemscope, itemtype='https://schema.org/BlogPosting')
+    a.posts__item-header(href=`${post.category.slug}/${post.slug}`)
+      span(itemprop="image" itemscope itemtype="http://schema.org/ImageObject")
+        meta(itemprop="url" content=`images/posts/${post.cover}_1600.jpeg`)
+        meta(itemprop="width" content="1600")
+        meta(itemprop="height" content="800")
+      picture
+        source(
+          type="image/webp"
+          data-srcset=`images/posts/${post.cover}_1600.webp 1600w, images/posts/${post.cover}_1080.webp 1080w, images/posts/${post.cover}_820.webp 820w, images/posts/${post.cover}_680.webp 680w, images/posts/${post.cover}_380.webp 380w`
+          sizes="(min-width: 860px) 30vw, (min-width: 720px) 50vw, 100vw"
+        )
+        img.lazy(
+          src="data:image/gif;base64,R0lGODlhAgABAIAAAP///wAAACH5BAEAAAEALAAAAAACAAEAAAICTAoAOw==",
+          data-src=`images/posts/${post.cover}_820.jpeg`,
+          data-srcset=`images/posts/${post.cover}_1600.jpeg 1600w, images/posts/${post.cover}_1080.jpeg 1080w, images/posts/${post.cover}_820.jpeg 820w, images/posts/${post.cover}_680.jpeg 680w, images/posts/${post.cover}_380.jpeg 380w`,
+          sizes="(min-width: 860px) 30vw, (min-width: 720px) 50vw, (min-width: 320px) 100vw",
+          alt=post.heading
+        )
+    span.posts__item-type
+      +svg(post.type, 'icon--xs')
+
+    - currentUserId = user ? user.id : ''
+    +buttonFavorite(post, currentUserId)
+
+    a.posts__item-category(href=post.category.slug target='__blank')= post.category.heading
+    h3(itemprop='name headline'): a.posts__item-title(href=`${post.category.slug}/${post.slug}`, itemprop='mainEntityOfPage url')= post.heading
+
+    .posts__item-footer
+      a.post__author-avatar(href=`user/${post.owner._id}` target='__blank')
+        img.lazy(
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==",
+          data-src= `images/users/${post.owner.photo}_50.jpeg`,
+          data-srcset= `images/users/${post.owner.photo}_50.jpeg 1x`,
+          alt= post.owner.fullName
+        )
+      .posts__item-info
+        a.post__author-name(href=`user/${post.owner._id}` target='__blank')=post.owner.fullName
+        meta(itemprop="author" content=post.owner.fullName)
+        meta(itemprop='datePublished' content=post.publishedAt)
+        meta(itemprop='dateModified' content=post.updatetAt)
+        span(itemprop="publisher" itemscope itemtype="https://schema.org/Organization")
+          meta(itemprop='name' content='gitCrafts')
+          span(itemprop="logo" itemscope itemtype="https://schema.org/ImageObject")
+            meta(itemprop='url' content='images/branding/logo@3x.png')
+            meta(itemprop='width' content='630')
+            meta(itemprop='height' content='630')
+        .posts__item-stats
+          span.badge.badge--difficulty(title='Уровень сложности')
+            +svg('difficulty', 'icon--xs')
+            span.count= post.difficulty
+          span.badge.badge--views(title='Просмотры')
+            +svg('eye', 'icon--xs')
+            span.count= post.views
+          span.badge.badge--likes(title='Лайки')
+            +svg('favorite', 'icon--xs')
+            span.count= post.favorites.length

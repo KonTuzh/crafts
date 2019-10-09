@@ -1,0 +1,14 @@
+extends ../../layouts/cabinet
+
+block content
+  aside.cabinet__sidebar
+    include ./navigation
+
+  .cabinet__main
+    section.page-section
+      include ./form-category
+
+append scripts
+  script(src='/js/ckeditor/translations/ru.js')
+  script(src='/js/ckeditor/ckeditor.js')
+  script(src='/js/editor.js')

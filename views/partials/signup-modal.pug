@@ -1,0 +1,72 @@
+#signup-overlay.overlay.scrollable(style='opacity: 0;')
+  .modal
+    button.js(data-action='closeModal')
+      +svg('cancel')
+    .modal__container
+      header.modal__header.lazy(data-bg=`url('images/signup-overlay-header.jpg')`)
+        .modal__header-content
+          +logoSvg('signup-modal', '', '44px')
+          h5 Откройте для себя мир поделок и креативных изделий ручной работы
+      #signup-fields.modal__fields.hide
+        p.modal__fields-text.text-center Зарегистрируйтесь с помощью социальной сети
+        include signup-social-buttons
+        button.js(data-action='showSignupForm') или с помощью Email
+        form.form.form--signup
+          fieldset.form-group
+            label.form__label(for='first-name') Имя
+            input#first-name.form__input(type='text', name='firstName' required)
+          fieldset.form-group
+            label.form__label(for='signup-email') Email
+            input#signup-email.form__input(type='email', name='email', autocomplete='email', required)
+            #signup-email-error.font-error
+          fieldset.form-group
+            label.form__label(for='signup-password') Пароль
+            input#signup-password.form__input(type='password', name='password', autocomplete='new-password', minlength=8, required)
+          fieldset.form-group
+            label.form__label(for='password-confirm') Подтвеждение пароля
+            input#password-confirm.form__input(type='password', name='passwordConfirm', autocomplete='new-password', required)
+          fieldset.form-group
+            label.control.control--checkbox(for='signup-agree-to-terms')
+              | Регистрируясь на этом сайте, я принимаю условия 
+              a(href='/agreement', target='_blank') Пользовательского соглашения
+              |  и 
+              a(href='/confidential', target='_blank') Политику конфиденциальности
+              input#signup-agree-to-terms(type='checkbox', name='agree' required)
+              .control__indicator
+          fieldset.form-group
+            button.button.button--flat(type='submit') Создать учетную запись
+        footer.modal__footer
+          p.modal__fields-text.text-center
+            | Уже есть аккаунт? 
+            button.js(data-action='showLoginFields') Войти
+
+      #login-fields.modal__fields
+        p.modal__fields-text.text-center Войдите с помощью социальной сети
+        include signup-social-buttons
+        form.form.form--login
+          fieldset.form-group
+            label.form__label(for='email') Email
+            input#email.form__input(type='email', name='email', autocomplete='email', required)
+          fieldset.form-group
+            label.form__label(for='password') Пароль
+            input#password.form__input(type='password', name='password', autocomplete='current-password', minlength=8, required)
+          a.forgot-password.js(href="/auth/password-reset", data-action='showForgotFields') Забыли пароль?
+          fieldset.form-group
+            button.button.button--flat(type='submit') Войти
+        footer.modal__footer
+          p.modal__fields-text.text-center
+            | Нет аккаунта? 
+            button.js(data-action='showSignupFields') Зарегистрируйтесь
+
+      #forgot-fields.modal__fields.hide
+        p.modal__fields-text.text-center Введите указанный при регистрации адрес электронной почты, и мы вышлем вам ссылку для сброса пароля.
+        form.form.form--forgot
+          fieldset.form-group
+            label.form__label(for='forgot-email') Email
+            input#forgot-email.form__input(type='email', name='email', autocomplete='email', required)
+          fieldset.form-group
+            button.button.button--flat(type='submit') Продолжить
+        footer.modal__footer
+          p.modal__fields-text.text-center
+            | Нет аккаунта? 
+            button.js(data-action='showSignupFields') Зарегистрируйтесь

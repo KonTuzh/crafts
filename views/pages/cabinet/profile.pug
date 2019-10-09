@@ -1,0 +1,65 @@
+extends ../../layouts/cabinet
+
+block content
+  aside.cabinet__sidebar
+    include ./navigation
+
+  .cabinet__main.profile
+    section.profile__data
+      form#form-user-avatar.form
+        .form-group--avatar
+          .avatar.avatar--profile
+            img#user-photo(src=`images/users/${user.photo}_150.jpeg`, alt=user.fullName)
+          label(for='photo', title=`${user.photo ? 'Изменить фото' : 'Загрузить фото'}`)
+            span: i.icon.material-icons create
+          input#photo.form__input(type="file", accept='image/*' name="photo")
+      .user
+        h1.user__name=user.fullName
+        .user__info
+          span.user__role= user.role
+          span.user__status(class=user.active ? 'user__status--active' : 'user__status--inactive')
+            | #{`${user.active ? 'Активный' : 'Неактивный'}`}
+    
+    section.page-section
+      h2.page-section__title Настройки аккаунта
+      form#form-user-settings.form.form--row
+        .form-group
+          label.form__label(for='first-name') Имя<sup class='red'>*</sup>
+          input#first-name.form__input.mb-1(type='text', name='firstName' value=`${user.firstName}` required)
+
+          label.form__label(for='last-name') Фамилия
+          input#last-name.form__input(type='text', name='lastName' value=`${user.lastName || ''}`)
+        .form-group
+          label.form__label(for='email') Email<sup class='red'>*</sup>
+          input#email.form__input.mb-1(type='email', name='email' value=`${user.email}` required)
+
+          label.form__label(for='url') Веб-сайт
+          input#url.form__input(type='url', name='url' value=`${user.url || ''}`)
+        .form-group
+          label.form__label(for='content') Подзаголовок <small>(максимум 1000 символов)</small>
+          textarea#content.form__input(name='content', maxlength='1000', tabindex='10', rows='7', style='height: auto;')= `${user.content ? user.content : ''}`
+
+        .form-group--button.text-right
+          button.button.button--flat(type='submit') Сохранить изменения
+    
+    section.page-section
+      h2.page-section__title Изменить пароль
+      form#form-user-password.form.form--row
+        .form-group
+          label.form__label(for='password-current') Текущий пароль<sup class='red'>*</sup>
+          input#password-current.form__input(type='password', name='passwordCurrent', autocomplete='off', minlenght='8', placeholder='********', required)
+        .form-group
+          label.form__label(for='password') Новый пароль<sup class='red'>*</sup>
+          input#password.form__input(type='password', name='password', autocomplete='off', minlenght='8', placeholder='********', required)
+        .form-group
+          label.form__label(for='password-confirm') Подтверждение пароля<sup class='red'>*</sup>
+          input#password-confirm.form__input(type='password', name='passwordConfirm' autocomplete='off', minlenght='8' placeholder='********' required)
+        .form-group--button.text-right
+          button.button.button--flat(type='submit') Сохранить пароль
+    
+    section.page-section
+      button(
+        class='button button--outline button--icon button--icon--left button--icon--xs button--light--hover',
+      )
+        +svg('trash')
+        span.button__text.show-sm Закрыть профиль

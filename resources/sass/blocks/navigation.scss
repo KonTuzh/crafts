@@ -1,0 +1,43 @@
+.navigation {
+  position: relative;
+  max-width: 100%;
+  @include wrapper-full();
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: $color--main;
+
+  a {
+    color: $color--white;
+    text-decoration: none;
+  }
+
+  .icon {
+    color: $color--white;
+    fill: $color--white;
+  }
+
+  &__menu {
+    margin-right: auto;
+    @include to($break_lg) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      width: 100%;
+      max-width: 300px;
+      height: 100vh;
+      padding: 60px 30px;
+      background: $color--main;
+      transform: translateX(-100%);
+      transition: transform .3s ease;
+    }
+    &.active {
+      @include to($break_lg) {
+        transform: translateX(0%);
+        box-shadow: 5px 0px 20px 0px rgba(0,0,0,0.18);
+      }
+    }
+  }
+}

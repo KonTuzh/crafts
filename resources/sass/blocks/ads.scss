@@ -1,0 +1,64 @@
+// ADS
+.line {
+  width: 100%;
+  min-height: 10px;
+  @include wrapper-full();
+  padding-top: 5px;
+  padding-bottom: 20px;
+  background-color: $color--light;
+  
+  .posts & {
+    margin-left: ($fields * -1);
+    margin-right: ($fields * -1);
+    width: calc(100% + #{$fields * 2});
+
+    @include sm-block(){
+      margin-left: ($fields_sm * -1);
+      margin-right: ($fields_sm * -1);
+      width: calc(100% + #{$fields_sm * 2});
+    }
+
+    @include md-block(){
+      margin-left: ($fields_md * -1);
+      margin-right: ($fields_md * -1);
+      width: calc(100% + #{$fields_md * 2});
+    }
+
+    .line__top,
+    .line__content {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+  }
+
+  &__top {
+    font-size: 10px;
+    line-height: 1;
+    color: $color--lightDark;
+  }
+
+  &__top a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+  }
+}
+
+.zaglushka {
+  width: 100%;
+  max-width: 980px;
+  padding: 40px;
+  font-size: 24px;
+  font-family: $font-secondary;
+  color: $color--main;
+  text-align: center;
+  background: $color--white;
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.08);
+}

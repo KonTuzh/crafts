@@ -1,0 +1,16 @@
+.profile {
+  &__data {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .form-group {
+    position: relative;
+    @include col();
+    @include size(12);
+    @include size-md(4);
+  }
+}

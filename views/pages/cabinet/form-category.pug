@@ -1,0 +1,54 @@
+form#form-category.form.form--row
+  .form-group.col-8
+    input#heading.input-heading(type='text', name='heading', value=`${category.heading ? category.heading : 'Укажите заголовок'}`, required)
+
+    if (user.role === 'admin' && category.slug)
+      input.form__input.mb-1(type='text', name='slug', value=`${category.slug}`, required)
+
+    if category.content
+      - content = category.content.replace( /&lt;/g, '<')
+    else
+      - str = '<p>Добавьте описание категории.</p><p>Минимальный объем: 50 символов.</p>'
+      - content = str.replace( '&', '&amp;')
+    #editor !{content}
+
+  .col-4
+    fieldset.form-group.form-group--cover
+      .single__cover
+        - cover = category.cover ? category.cover : 'default-png-1568550341166.jpeg'
+        img#post-cover(src=`images/categories/${cover}`, data-cover=cover alt='')
+      label(for='cover', title=`${category.cover ? 'Изменить обложку (820×410px)' : 'Загрузить обложку (820×410px)'}`)
+        span: i.icon.material-icons insert_photo
+      input#cover.form__input(type="file", accept='image/*' name="cover")
+
+    fieldset.form-group.form__post-fieldset
+      if category.id
+        input#post-id.form__input(type='hidden', name='id', value=category.id, required)
+      label.form__label(for='title') SEO заголовок
+      input#title.form__input.mb-1(type='text', name='title', value=`${category.title ? category.title : ''}`, required)
+
+      label.form__label(for='description') SEO описание
+      textarea#description.form__input.mb-1(name='description', rows='7' style='height: auto;' required)= `${category.description ? category.description : ''}`
+
+      if (user.role === 'admin')
+        select#status.form__select(name='status')
+          each opt in stats
+            if (category.status && category.status === opt.val)
+              option(value=opt.val selected)= opt.name
+            else
+              option(value=opt.val)= opt.name
+        if (category.status && category.status !== 'published')
+          input(type='hidden', name='publishedAt', value=`${Date.now()}`)
+
+    fieldset.form-group--button.text-right
+      button.button.button--flat(type='submit') Сохранить
+
+      if (user.role === 'admin' && category.id)
+        button(
+          class='button__delete button button--outline button--icon button--icon--left button--icon--xs button--light--hover'
+          type='button',
+          data-id=category.id,
+          data-type='categories'
+        )
+          +svg('trash')
+          span.button__text.show-sm Удалить

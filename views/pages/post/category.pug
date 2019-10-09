@@ -1,0 +1,20 @@
+extends ../../layouts/default
+
+include ../../mixins/pagination
+
+block content
+  section.content__hero.lazy(data-bg=`url('images/categories/${category.cover}')`)
+    h1.heading= category.heading
+    p.description= category.description
+
+  section.page-section.posts
+    .posts__header
+      - categoryContent = category.content.replace( /&lt;/g, '<')
+      | !{categoryContent}
+
+    if pagination
+      .posts__results.font-xxs
+        .posts__results-total= `Найдено: `
+          span.total-count= pagination.total
+    #posts
+      include ../../partials/posts-list

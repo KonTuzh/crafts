@@ -1,0 +1,28 @@
+extends ../../layouts/default
+
+include ../../mixins/pagination
+
+block content
+  section.content__hero.author
+    .avatar.avatar--profile
+      picture
+        source(
+          type="image/webp"
+          data-srcset=`images/users/${author.photo}_500.webp 500w`
+        )
+        img.lazy(
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==",
+          data-src= `images/users/${author.photo}_150.jpeg`,
+          data-srcset= `images/users/${author.photo}_150.jpeg 1x, images/users/${author.photo}_300.jpeg 2x, images/users/${author.photo}.jpeg 3x`,
+          alt=head.meta[1].content
+        )
+    h1.author__name=head.meta[1].content
+    p.author__bio #{author.content}
+
+  section.page-section.posts
+    if pagination
+      .posts__results.font-xxs
+        .posts__results-total= `Найдено: `
+          span.total-count= pagination.total
+    #posts
+      include ../../partials/posts-list

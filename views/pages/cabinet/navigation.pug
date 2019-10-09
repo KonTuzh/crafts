@@ -1,0 +1,12 @@
+mixin navItem(nav, role)
+  if (nav[role])
+    li.menu__item(class=`${nav.active ? 'menu__item--active' : ''}`)
+      a.menu__link(href=`${nav.url}`)
+        svg(class=`icon icon-${nav.icon}`, role='img')
+          use(xlink:href=`#${nav.icon}`)
+        | #{nav.name}
+
+nav.cabinet__nav
+  ul.menu.font-sm
+    each nav in cabinetNav
+      +navItem(nav, user.role)
