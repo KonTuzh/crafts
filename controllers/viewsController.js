@@ -329,7 +329,7 @@ module.exports.home = catchAsync(async (req, res, next) => {
     .skip(0)
     .limit(9);
 
-  const jsonLd = new JsonLd(req);
+  const jsonLd = new JsonLd();
 
   jsonLd.webpage({
     title: 'Поделки своими руками: мастер-классы и идеи уникальных подедлок',
@@ -413,7 +413,7 @@ module.exports.search = catchAsync(async (req, res, next) => {
 
   const data = await features.pagination();
 
-  const jsonLd = new JsonLd(req);
+  const jsonLd = new JsonLd();
 
   jsonLd.webpage({
     title: 'Находите поделки, видео и инструкции',
@@ -525,7 +525,7 @@ module.exports.postOne = catchAsync(async (req, res, next) => {
     .skip(0)
     .limit(6);
 
-  const jsonLd = new JsonLd(req);
+  const jsonLd = new JsonLd();
 
   jsonLd.webpage({
     title: post.title,
@@ -644,7 +644,7 @@ module.exports.postsCategory = catchAsync(async (req, res, next) => {
     return next(new AppError('Страница не найдена', 404));
   }
 
-  const jsonLd = new JsonLd(req);
+  const jsonLd = new JsonLd();
 
   jsonLd.webpage({
     title: category.title,
@@ -749,7 +749,7 @@ module.exports.postsUser = catchAsync(async (req, res, next) => {
     ? `${author.firstName} ${author.lastName}`
     : author.firstName;
 
-  const jsonLd = new JsonLd(req);
+  const jsonLd = new JsonLd();
 
   jsonLd.webpage({
     title: pageAuthor,

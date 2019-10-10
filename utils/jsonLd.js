@@ -5,16 +5,12 @@ const wordCount = str => {
 };
 
 class JsonLd {
-  constructor(req) {
+  constructor() {
     this.json = {};
-    this.domain = `${req.protocol}://${req.get('host')}`;
+    this.domain = process.env.DOMAIN;
     this.siteName = process.env.SITE_NAME;
     this.siteLogo = `${this.domain}/images/branding/logo@3x.png`;
-    this.sameAs = [
-      'https://facebook.com/page',
-      'https://vk.com/group',
-      'https://twitter.com/name'
-    ];
+    this.sameAs = ['https://vk.com/podelkirukamy'];
     this.author = '';
 
     this.website();

@@ -23,23 +23,23 @@ const passportOptions = {
   vk: {
     clientID: process.env.VKONTAKTE_APP_ID,
     clientSecret: process.env.VKONTAKTE_APP_SECRET,
-    callbackURL: 'http://127.0.0.1:3000/auth/vkontakte/callback',
+    callbackURL: process.env.VKONTAKTE_CALLBACK_URL,
     profileFields: ['photo_max_orig']
   },
   twitter: {
     consumerKey: process.env.TWITTER_CONSUMER_KEY,
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-    callbackURL: 'https://owlcrafts.localtunnel.me/auth/twitter/callback'
+    callbackURL: process.env.TWITTER_CALLBACK_URL
   },
   google: {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'https://owlcrafts.localtunnel.me/auth/google/callback'
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
   },
   facebook: {
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: 'https://owlcrafts.localtunnel.me/auth/facebook/callback',
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL,
     profileFields: ['id', 'displayName', 'name', 'email'],
     scope: ['public_profile', 'email'],
     enableProof: true

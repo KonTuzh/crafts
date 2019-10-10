@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.options('*', cors());
 app.use(cors());
 app.use(helmet());
-app.use(expressSitemapXml(getUrls, 'http://localhost:3000'));
+app.use(expressSitemapXml(getUrls, 'https://gitcrafts.com'));
 
 // Limit request from same API
 const limiter = rateLimit({
