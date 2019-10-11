@@ -84,7 +84,7 @@ const createSendToken = (user, statusCode, res) => {
 const authSuccessful = async (req, res, user, reg = false) => {
   if (reg) {
     try {
-      const url = `${req.protocol}://${req.get('host')}/me`;
+      const url = `${process.env.DOMAIN}/me`;
       await new Email(user, url).sendWelcome(user.generatePassword);
     } catch (error) {
       console.warn(`Ошибка отправки приветственного письма! ${error}`);
@@ -126,7 +126,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   );
   const newUser = await User.create(filteredBody);
 
-  const url = `${req.protocol}://${req.get('host')}/me`;
+  const url = `${process.env.DOMAIN}/me`;
   await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);
@@ -269,8 +269,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   // 3) Send Email
   try {
-    const domain = `${req.protocol}://${req.get('host')}`;
-    const resetUrl = `${domain}/auth/password-reset/${resetToken}`;
+    const resetUrl = `${process.env.DOMAIN}/auth/password-reset/${resetToken}`;
     await new Email(user, resetUrl).sendPasswordReset();
 
     res.status(200).json({
@@ -308,7 +307,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetTokenExpires = undefined;
   await user.save();
 
-  const resetUrl = `${req.protocol}://${req.get('host')}/auth/password-reset`;
+  const resetUrl = `${process.env.DOMAIN}/auth/password-reset`;
   await new Email(user, resetUrl).sendPasswordResetAfter();
 
   // 3) Update passwordChangedAt property for user

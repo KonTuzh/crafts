@@ -1,4 +1,8 @@
 node_modules/
+public/images/posts/
+public/images/categories/
+public/images/uploads/
+public/images/users/
 
 logs
 *.log

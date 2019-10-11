@@ -17,8 +17,6 @@ const validateObjectId = id =>
   ObjectId.isValid(id) && new ObjectId(id).toString() === id;
 
 module.exports.signup = (req, res) => {
-  const domain = `${req.protocol}://${req.get('host')}`;
-
   const head = {
     title: 'Регистрация',
     meta: [
@@ -46,18 +44,18 @@ module.exports.signup = (req, res) => {
       },
       {
         property: 'og:image',
-        content: `${domain}/images/category-cover--homepage.jpg`
+        content: `${process.env.DOMAIN}/images/category-cover--homepage.jpg`
       },
       {
         property: 'og:url',
-        content: `${domain}/auth/signup`
+        content: `${process.env.DOMAIN}/auth/signup`
       },
       {
         property: 'og:site_name',
         content: process.env.SITE_NAME
       }
     ],
-    canonical: `${domain}/auth/signup`
+    canonical: `${process.env.DOMAIN}/auth/signup`
   };
   res.status(200).render('pages/auth/signup', {
     head,
@@ -67,7 +65,6 @@ module.exports.signup = (req, res) => {
 };
 
 module.exports.login = (req, res) => {
-  const domain = `${req.protocol}://${req.get('host')}`;
   const head = {
     title: 'Войти',
     meta: [
@@ -95,18 +92,18 @@ module.exports.login = (req, res) => {
       },
       {
         property: 'og:image',
-        content: `${domain}/images/category-cover--homepage.jpg`
+        content: `${process.env.DOMAIN}/images/category-cover--homepage.jpg`
       },
       {
         property: 'og:url',
-        content: `${domain}/auth/login`
+        content: `${process.env.DOMAIN}/auth/login`
       },
       {
         property: 'og:site_name',
         content: process.env.SITE_NAME
       }
     ],
-    canonical: `${domain}/auth/login`
+    canonical: `${process.env.DOMAIN}/auth/login`
   };
 
   res.status(200).render('pages/auth/login', {
@@ -118,7 +115,6 @@ module.exports.login = (req, res) => {
 };
 
 module.exports.passwordForgot = (req, res) => {
-  const domain = `${req.protocol}://${req.get('host')}`;
   const head = {
     title: 'Войти',
     meta: [
@@ -127,7 +123,7 @@ module.exports.passwordForgot = (req, res) => {
         content: 'noindex, nofollow'
       }
     ],
-    canonical: `${domain}/auth/password-reset`
+    canonical: `${process.env.DOMAIN}/auth/password-reset`
   };
 
   res.status(200).render('pages/auth/password-forgot', {
@@ -914,7 +910,7 @@ module.exports.profile = (req, res, next) => {
         content: 'noindex, nofollow'
       }
     ],
-    canonical: `${req.protocol}://${req.get('host')}/me`
+    canonical: `${process.env.DOMAIN}/me`
   };
 
   res.status(200).render('pages/cabinet/profile', {
@@ -954,7 +950,7 @@ module.exports.listFavorites = catchAsync(async (req, res, next) => {
         content: 'noindex, nofollow'
       }
     ],
-    canonical: `${req.protocol}://${req.get('host')}/favorites`
+    canonical: `${process.env.DOMAIN}/favorites`
   };
 
   const total = content.length;
@@ -992,7 +988,7 @@ module.exports.listCategories = catchAsync(async (req, res, next) => {
         content: 'noindex, nofollow'
       }
     ],
-    canonical: `${req.protocol}://${req.get('host')}/categories`
+    canonical: `${process.env.DOMAIN}/categories`
   };
 
   const total = data.pagination.itemCount;
@@ -1026,7 +1022,7 @@ module.exports.newCategory = catchAsync(async (req, res, next) => {
         content: 'noindex, nofollow'
       }
     ],
-    canonical: `${req.protocol}://${req.get('host')}/categories/new`
+    canonical: `${process.env.DOMAIN}/categories/new`
   };
 
   const stats = [
@@ -1057,7 +1053,7 @@ module.exports.editCategory = catchAsync(async (req, res, next) => {
         content: 'noindex, nofollow'
       }
     ],
-    canonical: `${req.protocol}://${req.get('host')}/categories/${category.id}`
+    canonical: `${process.env.DOMAIN}/categories/${category.id}`
   };
 
   const stats = [
@@ -1096,7 +1092,7 @@ module.exports.listPosts = catchAsync(async (req, res, next) => {
         content: 'noindex, nofollow'
       }
     ],
-    canonical: `${req.protocol}://${req.get('host')}/posts`
+    canonical: `${process.env.DOMAIN}/posts`
   };
 
   const total = data.pagination.itemCount;
@@ -1131,7 +1127,7 @@ module.exports.editPost = catchAsync(async (req, res, next) => {
         content: 'noindex, nofollow'
       }
     ],
-    canonical: `${req.protocol}://${req.get('host')}/posts/${post.id}`
+    canonical: `${process.env.DOMAIN}/posts/${post.id}`
   };
 
   const types = [
@@ -1168,7 +1164,7 @@ module.exports.newPost = catchAsync(async (req, res, next) => {
         content: 'noindex, nofollow'
       }
     ],
-    canonical: `${req.protocol}://${req.get('host')}/posts/new`
+    canonical: `${process.env.DOMAIN}/posts/new`
   };
 
   const types = [
@@ -1201,12 +1197,12 @@ module.exports.confidential = (req, res) => {
   const head = {
     title: 'Политика конфиденциальности',
     meta: [{ name: 'robots', content: 'noindex' }],
-    canonical: `${req.protocol}://${req.get('host')}/confidential`
+    canonical: `${process.env.DOMAIN}/confidential`
   };
 
   res.status(200).render('pages/confidential', {
     head,
-    domain: `${req.protocol}://${req.get('host')}`,
+    domain: process.env.DOMAIN,
     email: 'support@example.com',
     heading: 'Политика конфиденциальности',
     bodyClass: 'document'
@@ -1217,12 +1213,12 @@ module.exports.agreement = (req, res) => {
   const head = {
     title: 'Пользовательское соглашение',
     meta: [{ name: 'robots', content: 'noindex' }],
-    canonical: `${req.protocol}://${req.get('host')}/agreement`
+    canonical: `${process.env.DOMAIN}/agreement`
   };
 
   res.status(200).render('pages/agreement', {
     head,
-    domain: `${req.protocol}://${req.get('host')}`,
+    domain: process.env.DOMAIN,
     heading: 'Пользовательское соглашение',
     bodyClass: 'document'
   });

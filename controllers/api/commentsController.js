@@ -15,8 +15,7 @@ exports.addComment = catchAsync(async (req, res, next) => {
   doc.owner = req.user;
 
   if (doc) {
-    const domain = `${req.protocol}://${req.get('host')}`;
-    const url = `${domain}/comments/${doc.id}`;
+    const url = `${process.env.DOMAIN}/comments/${doc.id}`;
     const admin = {
       email: process.env.EMAIL_ADMIN,
       firstName: 'ADMIN'

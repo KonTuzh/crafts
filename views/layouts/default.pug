@@ -28,10 +28,10 @@ html(lang="ru-RU", data-active=`${filterShow ? 'page-filter' : ''}`)
           +menuItem('/origami', 'Оригами')
 
       .social
-        a.social__link(href='#', title='ВКонтакте', target='__blank', rel='nofollow'): +svg('vk', 'icon--xs')
-        a.social__link(href='#', title='Twitter', target='__blank', rel='nofollow'): +svg('twitter', 'icon--xs')
-        a.social__link(href='#', title='Facebook', target='__blank', rel='nofollow'): +svg('facebook', 'icon--xs')
-        a.social__link(href='#', title='Instagram', target='__blank', rel='nofollow'): +svg('instagram', 'icon--xs')
+        a.social__link(href='https://vk.com/podelkirukamy', title='ВКонтакте', target='__blank', rel='nofollow'): +svg('vk', 'icon--xs')
+        //- a.social__link(href='#', title='Twitter', target='__blank', rel='nofollow'): +svg('twitter', 'icon--xs')
+        //- a.social__link(href='#', title='Facebook', target='__blank', rel='nofollow'): +svg('facebook', 'icon--xs')
+        //- a.social__link(href='#', title='Instagram', target='__blank', rel='nofollow'): +svg('instagram', 'icon--xs')
 
       .auth
         if user
