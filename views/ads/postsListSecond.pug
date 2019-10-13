@@ -1,5 +1,8 @@
 .line
-  .line__top
-    a(href="/ads", target='__blank', rel='noopener noreferrer') О рекламе
-  .line__content
-    .zaglushka Здесь могла бы быть ваша реклама
+  if (nodeEnv === 'production')
+    .text-center
+  else
+    .line__top
+      a(href="/ads", target='__blank', rel='noopener noreferrer') О рекламе
+    .line__content
+      .zaglushka Здесь могла бы быть ваша реклама

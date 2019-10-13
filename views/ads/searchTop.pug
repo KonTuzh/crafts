@@ -1,5 +1,8 @@
 .line
-  .line__top
-    a(href="/ads", target='__blank', rel='noopener noreferrer') О рекламе
-  .line__content
-    .zaglushka Adblock украл эту рекламу...
+  if (nodeEnv === 'production')
+    .text-center
+  else
+    .line__top
+      a(href="/ads", target='__blank', rel='noopener noreferrer') О рекламе
+    .line__content
+      .zaglushka Adblock украл эту рекламу...

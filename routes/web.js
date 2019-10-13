@@ -19,6 +19,11 @@ const router = Router({ mergeParams: true });
 
 const { csrfProtection } = require('../utils/csrf');
 
+router.use((req, res, next) => {
+  res.locals.nodeEnv = process.env.NODE_ENV;
+  next();
+});
+
 // Authenticated
 router.get('/auth/login', viewsController.login);
 router.get('/auth/signup', viewsController.signup);

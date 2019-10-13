@@ -1203,7 +1203,7 @@ module.exports.confidential = (req, res) => {
   res.status(200).render('pages/confidential', {
     head,
     domain: process.env.DOMAIN,
-    email: 'support@example.com',
+    email: 'support@gitcrafts.com',
     heading: 'Политика конфиденциальности',
     bodyClass: 'document'
   });
@@ -1226,7 +1226,6 @@ module.exports.agreement = (req, res) => {
 
 module.exports.redirect = (req, res) => {
   const { url } = req.query;
-  console.log(url);
 
   const head = {
     title: 'Переход по внешней ссылке',
