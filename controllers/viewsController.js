@@ -1224,6 +1224,24 @@ module.exports.agreement = (req, res) => {
   });
 };
 
+module.exports.redirect = (req, res) => {
+  const { url } = req.query;
+  console.log(url);
+
+  const head = {
+    title: 'Переход по внешней ссылке',
+    meta: [{ name: 'robots', content: 'noindex nofollow' }],
+    canonical: `${process.env.DOMAIN}/redirect`
+  };
+
+  res.status(200).render('pages/redirect', {
+    head,
+    url,
+    heading: 'Переход на внешний ресурс',
+    bodyClass: 'document'
+  });
+};
+
 module.exports.notFound = (req, res, next) => {
   const msg = `Такая страница не существует на сайте. Возможно, она была удалена или перенесена.`;
   return next(new AppError(msg, 404));

@@ -38,6 +38,8 @@ router.get('/auth/google/callback', loginGoogleCallback);
 router.get('/confidential', isAuth, viewsController.confidential);
 router.get('/agreement', isAuth, viewsController.agreement);
 
+router.get('/redirect', isAuth, viewsController.redirect);
+
 // User All
 router.get('/me', protect, viewsController.profile);
 router.get('/favorites', protect, viewsController.listFavorites);

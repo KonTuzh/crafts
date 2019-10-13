@@ -4,6 +4,7 @@
   flex-wrap: wrap;
 
   &__content {
+    width: 100%;
     @include md-block(){
       width: calc(100% - 340px);
       display: flex;
