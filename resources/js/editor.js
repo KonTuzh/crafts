@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         notice.pnotify('error', { title: 'Ошибка!', text: 'URL записи не валиден'});
       }
 
-      const oldStatus = trigger.dataset.status;
+      const oldStatus = formPost.querySelector('#status').dataset.status;
       const newStatus = formData.get('status');
 
       if (oldStatus !== newStatus && newStatus === 'published') {
@@ -255,6 +255,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let postCover = form.querySelector('#post-cover');
     const formData = new FormData(form);
     const img = await uploadImages(formData, url);
+    console.log(img.cover);
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    await sleep(500);
     if (img.cover) {
       postCover.setAttribute('src', `images/${folder}/${img.cover}${img.size}`);
       postCover.dataset.cover = img.cover;
