@@ -172,10 +172,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
       try {
         formData = getFormData(event.target);
-        data = formToJSON(formData);
       } catch (error) {
         notice.pnotify('error', { title: 'Ошибка!', text: 'URL записи не валиден'});
       }
+
+      const oldStatus = trigger.dataset.status;
+      const newStatus = formData.get('status');
+
+      if (oldStatus !== newStatus && newStatus === 'published') {
+        formData.set('publishedAt', Date.now());
+      }
+
+      data = formToJSON(formData);
 
       if (formData.get('id')) {
         await update(data, `posts/${formData.get('id')}`);

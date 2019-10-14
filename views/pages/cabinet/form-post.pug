@@ -65,7 +65,7 @@ form#form-post.form.form--row(enctype="multipart/form-data")
       #keywords.input-tags.mb-1
 
       if (user.role === 'admin')
-        select#status.form__select(name='status')
+        select#status.form__select(name='status', data-status=`${post.status ? post.status : ''}`)
           each opt in stats
             if (post.status && post.status === opt.val)
               option(value=opt.val selected)= opt.name
