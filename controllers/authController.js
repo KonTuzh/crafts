@@ -277,6 +277,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
       message: 'Ссылка для сброса пароля выслана на указанный Email.'
     });
   } catch (error) {
+    console.log(error);
     user.createPasswordResetToken = undefined;
     user.passwordResetTokenExpires = undefined;
     await user.save({ validateBeforeSave: false });

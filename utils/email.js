@@ -7,20 +7,16 @@ module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
     this.firstName = user.firstName;
+    this.siteName = process.env.SITE_NAME;
     this.url = url;
-    this.from = `CraftHub <${process.env.EMAIL_FROM}>`;
+    this.from = `${this.siteName} <${process.env.EMAIL_FROM}>`;
   }
 
   newTransport() {
-    if (process.env.NODE_ENV === 'production') {
-      // Sendgrid
-      return 1;
-    }
-
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_PORT,
-      secure: false,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD
@@ -53,7 +49,7 @@ module.exports = class Email {
       email: this.to,
       password,
       url: this.url,
-      subject: 'Добро пожаловать на CraftHub!'
+      subject: `Добро пожаловать на ${this.siteName}!`
     };
     const html = this.renderHtml('welcome', data);
     await this.send(html, data.subject);
@@ -63,7 +59,7 @@ module.exports = class Email {
     const data = {
       firstName: this.firstName,
       url: this.url,
-      subject: '[CraftHub] Сбросить пароль'
+      subject: `[${this.siteName}] Сбросить пароль`
     };
     const html = this.renderHtml('passwordReset', data);
     await this.send(html, data.subject);
@@ -73,19 +69,18 @@ module.exports = class Email {
     const data = {
       firstName: this.firstName,
       url: this.url,
-      subject: '[CraftHub] Ваш пароль был сброшен'
+      subject: `[${this.siteName}] Ваш пароль был сброшен`
     };
     const html = this.renderHtml('passwordResetAfter', data);
     await this.send(html, data.subject);
   }
 
   async sendCommentNotification(comment) {
-    console.log('sendCommentNotification', comment);
     const data = {
       firstName: this.firstName,
       comment,
       url: this.url,
-      subject: '[CraftHub] Новый комментарий'
+      subject: `[${this.siteName}] Новый комментарий`
     };
     const html = this.renderHtml('commentNotification', data);
     await this.send(html, data.subject);
