@@ -203,7 +203,7 @@ const createSocialUser = async (data, social) => {
 
 exports.findOrCreateUserVK = async (access, refresh, params, profile, done) => {
   let user = await User.findOne({ 'vkontakte.id': profile.id });
-  if (user) return done(null, user);
+  if (user) return done(null, user, false);
 
   if (!params.email)
     return done({ message: 'Авторизация не возможна без email' }, null);
@@ -224,7 +224,7 @@ exports.findOrCreateUserVK = async (access, refresh, params, profile, done) => {
   if (user) {
     try {
       const tie = await tieSocialNetworkToUser(user, { vkontakte }, avatarUrl);
-      return done(null, tie);
+      return done(null, tie, false);
     } catch (error) {
       return done(error, null);
     }
@@ -257,7 +257,7 @@ exports.findOrCreateUserTwitter = async (token, tokenSecret, profile, done) => {
 
 exports.findOrCreateUserGoogle = async (access, refresh, profile, done) => {
   let user = await User.findOne({ 'google.id': profile.id });
-  if (user) return done(null, user);
+  if (user) return done(null, user, false);
 
   if (!profile._json.email)
     return done({ message: 'Авторизация не возможна без email' }, null);
@@ -277,7 +277,7 @@ exports.findOrCreateUserGoogle = async (access, refresh, profile, done) => {
   if (user) {
     try {
       const tie = await tieSocialNetworkToUser(user, { google }, avatarUrl);
-      return done(null, tie);
+      return done(null, tie, false);
     } catch (error) {
       return done(error, null);
     }
@@ -301,7 +301,7 @@ exports.findOrCreateUserGoogle = async (access, refresh, profile, done) => {
 
 exports.findOrCreateUserFacebook = async (access, refresh, profile, done) => {
   let user = await User.findOne({ 'facebook.id': profile.id });
-  if (user) return done(null, user);
+  if (user) return done(null, user, false);
 
   if (!profile._json.email)
     return done({ message: 'Авторизация не возможна без email' }, null, null);
@@ -322,7 +322,7 @@ exports.findOrCreateUserFacebook = async (access, refresh, profile, done) => {
   if (user) {
     try {
       const tie = await tieSocialNetworkToUser(user, { facebook }, avatarUrl);
-      return done(null, tie);
+      return done(null, tie, false);
     } catch (error) {
       return done(error, null);
     }
