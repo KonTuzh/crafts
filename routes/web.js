@@ -6,9 +6,11 @@ const {
   restrictTo,
   sendReferer,
   loginGoogle,
+  loginTwitter,
   loginFacebook,
   loginVkontakte,
   loginGoogleCallback,
+  loginTwitterCallback,
   loginFacebookCallback,
   loginVkontakteCallback
 } = require('../controllers/authController');
@@ -36,8 +38,8 @@ router.get('/auth/facebook', sendReferer, loginFacebook);
 router.get('/auth/facebook/callback', loginFacebookCallback);
 router.get('/auth/google', sendReferer, loginGoogle);
 router.get('/auth/google/callback', loginGoogleCallback);
-// router.get('/auth/twitter', sendReferer, loginTwitter);
-// router.get('/auth/twitter/callback', loginTwitterCallback);
+router.get('/auth/twitter', sendReferer, loginTwitter);
+router.get('/auth/twitter/callback', loginTwitterCallback);
 
 // Information
 router.get('/confidential', isAuth, viewsController.confidential);

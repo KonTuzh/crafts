@@ -5,7 +5,7 @@ const passport = require('passport');
 const VKontakte = require('passport-vkontakte').Strategy;
 const Google = require('passport-google-oauth20').Strategy;
 const Facebook = require('passport-facebook').Strategy;
-// const Twitter = require('passport-twitter').Strategy;
+const Twitter = require('passport-twitter').Strategy;
 
 const User = require('./../models/User');
 const catchAsync = require('./../utils/catchAsync');
@@ -14,7 +14,7 @@ const Email = require('./../utils/email');
 
 const {
   findOrCreateUserVK,
-  // findOrCreateUserTwitter,
+  findOrCreateUserTwitter,
   findOrCreateUserGoogle,
   findOrCreateUserFacebook
 } = require('./api/userController');
@@ -29,7 +29,8 @@ const passportOptions = {
   twitter: {
     consumerKey: process.env.TWITTER_CONSUMER_KEY,
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-    callbackURL: process.env.TWITTER_CALLBACK_URL
+    callbackURL: process.env.TWITTER_CALLBACK_URL,
+    profileFields: ['include_email']
   },
   google: {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -49,7 +50,7 @@ const passportOptions = {
 passport.use(new VKontakte(passportOptions.vk, findOrCreateUserVK));
 passport.use(new Google(passportOptions.google, findOrCreateUserGoogle));
 passport.use(new Facebook(passportOptions.facebook, findOrCreateUserFacebook));
-// passport.use(new Twitter(passportOptions.twitter, findOrCreateUserTwitter));
+passport.use(new Twitter(passportOptions.twitter, findOrCreateUserTwitter));
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -82,7 +83,7 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 const authSuccessful = async (req, res, user, reg = false) => {
-  if (reg) {
+  if (reg === true) {
     try {
       const url = `${process.env.DOMAIN}/me`;
       await new Email(user, url).sendWelcome(user.generatePassword);
