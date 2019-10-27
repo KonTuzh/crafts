@@ -160,6 +160,7 @@ block content
   include ../../partials/share-modal
 
 append scripts
+  script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
   script(src='/js/lg/lightgallery.min.js')
   script(src='/js/lg/lg-pager.min.js')
   script(src='/js/lg/lg-autoplay.min.js')
@@ -167,4 +168,7 @@ append scripts
   script(src='/js/lg/lg-hash.min.js')
   script(src='/js/lg/lg-share.min.js')
   script.
-    lightGallery(document.getElementById('galery'));
+    document.addEventListener('DOMContentLoaded', function() {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      lightGallery(document.getElementById('galery'));
+    });

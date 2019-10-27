@@ -32,3 +32,10 @@ block content
         span.button__text.show-sm Фильтры
     #posts
       include ../partials/posts-list
+
+append scripts
+  script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    });
