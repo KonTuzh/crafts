@@ -7,6 +7,7 @@ prepend styles
   link(rel='stylesheet', href='css/lightgallery.css')
 
 block content
+  script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
   section.single(class=`single--${post.type}`)
     - currentUserId = user ? user.id : ''
     article.single__content(id=post.id)
@@ -160,7 +161,6 @@ block content
   include ../../partials/share-modal
 
 append scripts
-  script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
   script(src='/js/lg/lightgallery.min.js')
   script(src='/js/lg/lg-pager.min.js')
   script(src='/js/lg/lg-autoplay.min.js')
@@ -169,6 +169,5 @@ append scripts
   script(src='/js/lg/lg-share.min.js')
   script.
     document.addEventListener('DOMContentLoaded', function() {
-      (adsbygoogle = window.adsbygoogle || []).push({});
       lightGallery(document.getElementById('galery'));
     });

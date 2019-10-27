@@ -25,11 +25,5 @@ block content
         .posts__results-total= `Найдено: `
           span.total-count= pagination.total
     #posts
+      script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
       include ../../partials/posts-list
-
-append scripts
-  script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
-  script.
-    document.addEventListener('DOMContentLoaded', function() {
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    });

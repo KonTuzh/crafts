@@ -1,5 +1,5 @@
 if (nodeEnv === 'production')
-  .text-center
+  .text-center.sticky(style='flex: 1 0 100%;')
     .line-wrap(style='width: 100%')
       ins(class="adsbygoogle"
           style="display:block"
@@ -8,5 +8,9 @@ if (nodeEnv === 'production')
           data-ad-format="auto"
           data-full-width-responsive="true"
       )
+      script.
+        document.addEventListener('DOMContentLoaded', function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        });
 else
   .zaglushka.sticky(style='width: 300px; height: 450px;') Здесь будет рекламный баннер

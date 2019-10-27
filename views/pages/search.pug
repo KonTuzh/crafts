@@ -1,6 +1,7 @@
 extends ../layouts/default
 
 block content
+  script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
   include ../ads/searchTop
 
   section.page-section.posts
@@ -11,11 +12,3 @@ block content
         span.total-count= hero.total
     #posts
       include ../partials/posts-list
-
-
-append scripts
-  script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
-  script.
-    document.addEventListener('DOMContentLoaded', function() {
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    });

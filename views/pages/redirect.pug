@@ -1,6 +1,7 @@
 extends ../layouts/empty
 
 block content
+  script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
   .document__header
     +logoLink('login', '', '/', '44px')
     .auth.font-xs
@@ -42,10 +43,8 @@ block content
 
 
 append scripts
-  script(async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
   script.
     document.addEventListener('DOMContentLoaded', function() {
-      (adsbygoogle = window.adsbygoogle || []).push({});
       const link = document.querySelector('#redirect-url');
       if (!link) { return; }
       const clock = document.querySelector('div#clock');
